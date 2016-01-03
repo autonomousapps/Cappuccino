@@ -15,6 +15,7 @@ public class Americano {
 
     private static boolean mIsTesting = true;
 
+    // TODO find an elegant way to remove items from this map once they are no longer needed
     private static final Map<String, AmericanoResourceWatcher> mMap = new HashMap<>();
 
     @NonNull
@@ -61,19 +62,25 @@ public class Americano {
         return registerIdlingResource(nameOf(object));
     }
 
+    // TODO this should add the resource to another internal map for later unregistration.
     @NonNull
     public static IdlingResource registerIdlingResource(@NonNull String name) {
-        AmericanoResource idlingResource = new AmericanoResource(name);
+        AmericanoIdlingResource idlingResource = new AmericanoIdlingResource(name);
         Espresso.registerIdlingResources(idlingResource);
         return idlingResource;
+    }
+
+    public static void unregisterIdlingResource(@NonNull IdlingResource idlingResource) {
+        Espresso.unregisterIdlingResources(idlingResource);
     }
 
     public static void unregisterIdlingResource(@NonNull Object object) {
         unregisterIdlingResource(nameOf(object));
     }
 
+    // TODO this shouldn't create a new resource for this purpose
     public static void unregisterIdlingResource(@NonNull String name) {
-        AmericanoResource idlingResource = new AmericanoResource(name);
+        AmericanoIdlingResource idlingResource = new AmericanoIdlingResource(name);
         Espresso.unregisterIdlingResources(idlingResource);
     }
 

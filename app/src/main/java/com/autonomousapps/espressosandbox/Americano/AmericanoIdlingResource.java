@@ -6,19 +6,30 @@ import android.support.test.espresso.IdlingResource;
 /**
  * Created by Tony on 1/1/2016.
  */
-public class AmericanoResource implements IdlingResource {
+public class AmericanoIdlingResource implements IdlingResource {
 
-    private static final String TAG = AmericanoResource.class.getSimpleName();
+    private static final String TAG = AmericanoIdlingResource.class.getSimpleName();
 
     private final String mName;
     private ResourceCallback mCallback;
 
-    public AmericanoResource(@NonNull String name) {
+    /**
+     * Instantiates a new {@code AmericanoResource}, and associates with a name, or key.
+     *
+     * @param name The name for this resource.
+     */
+    public AmericanoIdlingResource(@NonNull String name) {
         mName = name;
     }
 
-    public AmericanoResource(@NonNull Object resource) {
-        mName = Americano.nameOf(resource);
+    /**
+     * Instantiates a new {@code AmericanoResource}, and associates with a name, or key,
+     * which is derived from the {@code object} supplied.
+     *
+     * @param object The object from which to get a name for this resource.
+     */
+    public AmericanoIdlingResource(@NonNull Object object) {
+        mName = Americano.nameOf(object);
     }
 
     @Override
