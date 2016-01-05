@@ -1,9 +1,11 @@
 package com.autonomousapps.espressosandbox;
 
 import android.content.Intent;
+import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 
 import com.autonomousapps.espressosandbox.Americano.Americano;
+import com.autonomousapps.espressosandbox.Americano.AmericanoIdlingResource;
 
 import org.junit.After;
 import org.junit.Before;
@@ -26,13 +28,23 @@ public class MainActivityTest {
 
     @After
     public void tearDown() throws Exception {
-
+        Americano.reset();
     }
 
     private ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
 
     @Test
-    public void testSomething() throws Exception {
+    public void testAmericanoIdlingResource() throws Exception {
+        AmericanoIdlingResource idlingResource = new AmericanoIdlingResource(mActivityTestRule.getActivity());
+        Espresso.registerIdlingResources(idlingResource);
+
+        onView(withId(R.id.text_hello)).check(matches(isDisplayed()));
+
+        Espresso.unregisterIdlingResources(idlingResource);
+    }
+
+    @Test
+    public void testAmericanoIdlingResource2() throws Exception {
         Americano.registerIdlingResource(mActivityTestRule.getActivity());
 
         onView(withId(R.id.text_hello)).check(matches(isDisplayed()));

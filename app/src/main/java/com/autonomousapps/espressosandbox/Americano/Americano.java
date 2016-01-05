@@ -16,13 +16,32 @@ public class Americano {
     private static boolean mIsTesting = true;
 
     // TODO find an elegant way to remove items from this map once they are no longer needed
-    private static final Map<String, AmericanoResourceWatcher> mMap = new HashMap<>();
+    private static final Map<String, AmericanoResourceWatcher> mResourceWatcherRegistry = new HashMap<>();
 
+    private static final Map<String, AmericanoIdlingResource> mIdlingResourceRegistry = new HashMap<>();
+
+    /**
+     * Returns a new {@code AmericanoResourceWatcher}, which will be associated internally with a name derived from
+     * {@param resource}. Internally, this uses either the canonical or simple name of the resource's class,
+     * but this may change. Will return either a {@link OperatingAmericanoResourceWatcher} if we're testing, or a
+     * {@link NoOpAmericanoResourceWatcher} if we're in production. See {@link #isTesting()}.
+     *
+     * @param resource The object for which this {@link AmericanoResourceWatcher} will be a member.
+     * @return an {@link AmericanoResourceWatcher}.
+     */
     @NonNull
     public static AmericanoResourceWatcher newIdlingResourceWatcher(@NonNull Object resource) {
         return newIdlingResourceWatcher(nameOf(resource));
     }
 
+    /**
+     * Returns a new {@code AmericanoResourceWatcher}, which will be associated internally with the name supplied.
+     * Will return either a {@link OperatingAmericanoResourceWatcher} if we're testing, or a {@link NoOpAmericanoResourceWatcher}
+     * if we're in production. See {@link #isTesting()}.
+     *
+     * @param name The name of this {@link AmericanoResourceWatcher}.
+     * @return an {@link AmericanoResourceWatcher}.
+     */
     @NonNull
     public static AmericanoResourceWatcher newIdlingResourceWatcher(@NonNull String name) {
         AmericanoResourceWatcher watcher;
@@ -31,10 +50,17 @@ public class Americano {
         } else {
             watcher = new NoOpAmericanoResourceWatcher();
         }
-        mMap.put(name, watcher);
+        mResourceWatcherRegistry.put(name, watcher);
         return watcher;
     }
 
+    /**
+     * Returns a name for the supplied {@code object}. Uses either {@code object.getClass().getCanonicalName()},
+     * or {@code object.getClass().getSimpleName()} if the former returns null.
+     *
+     * @param object The {@code object} for which to generate a name.
+     * @return a name for the supplied {@code object}.
+     */
     @NonNull
     public static String nameOf(@NonNull Object object) {
         String name = object.getClass().getCanonicalName();
@@ -42,60 +68,114 @@ public class Americano {
         return name;
     }
 
+    /**
+     * Returns the {@code AmericanoResourceWatcher}, from the internal registry, associated
+     * with the given {@param object}.
+     *
+     * @param object The object associated with the {@link AmericanoResourceWatcher}.
+     * @return the {@code AmericanoResourceWatcher}, from the internal registry, associated
+     * with the given {@param object}.
+     * @throws IllegalArgumentException if there is no {@code AmericanoResourceWatcher} associated
+     *                                  with the given {@param object}.
+     */
     @NonNull
     public static AmericanoResourceWatcher getResourceWatcher(@NonNull Object object) {
         return getResourceWatcher(nameOf(object));
     }
 
+    /**
+     * Returns the {@code AmericanoResourceWatcher}, from the internal registry, associated
+     * with the given {@param name}.
+     *
+     * @param name The name associated with the {@link AmericanoResourceWatcher}.
+     * @return the {@code AmericanoResourceWatcher}, from the internal registry, associated
+     * with the given {@param name}.
+     * @throws IllegalArgumentException if there is no {@code AmericanoResourceWatcher} associated
+     *                                  with the given {@param name}.
+     */
     @NonNull
     public static AmericanoResourceWatcher getResourceWatcher(@NonNull String name) {
-        if (!mMap.containsKey(name)) {
+        if (!mResourceWatcherRegistry.containsKey(name)) {
             throw new IllegalArgumentException( // TODO define a new Exception type
                     String.format("There is no %s associated with the name %s", AmericanoResourceWatcher.class.getName(), name));
         }
 
-        return mMap.get(name);
+        return mResourceWatcherRegistry.get(name);
     }
 
-    @NonNull
-    public static IdlingResource registerIdlingResource(@NonNull Object object) {
-        return registerIdlingResource(nameOf(object));
+    /**
+     * Convenience method for {@link Espresso#registerIdlingResources(IdlingResource...)}, which first
+     * instantiates an {@link AmericanoIdlingResource}, then registers it with {@code Espresso}.
+     *
+     * @param object The object from which to generate an {@code AmericanoIdlingResource}.
+     */
+    public static void registerIdlingResource(@NonNull Object object) {
+        registerIdlingResource(nameOf(object));
     }
 
-    // TODO this should add the resource to another internal map for later unregistration.
-    @NonNull
-    public static IdlingResource registerIdlingResource(@NonNull String name) {
+    /**
+     * Convenience method for {@link Espresso#registerIdlingResources(IdlingResource...)}, which first
+     * instantiates an {@link AmericanoIdlingResource}, then registers it with {@code Espresso}.
+     *
+     * @param name The name from which to generate an {@code AmericanoIdlingResource}.
+     */
+    public static void registerIdlingResource(@NonNull String name) {
         AmericanoIdlingResource idlingResource = new AmericanoIdlingResource(name);
+        mIdlingResourceRegistry.put(name, idlingResource);
         Espresso.registerIdlingResources(idlingResource);
-        return idlingResource;
     }
 
-    public static void unregisterIdlingResource(@NonNull IdlingResource idlingResource) {
-        Espresso.unregisterIdlingResources(idlingResource);
-    }
-
+    /**
+     * Convenience method for {@link Espresso#unregisterIdlingResources(IdlingResource...)}, which
+     * is the twin of {@link #registerIdlingResource(Object)}.
+     *
+     * @param object The object associated with the {@link AmericanoIdlingResource} you wish to
+     *               unregister.
+     */
     public static void unregisterIdlingResource(@NonNull Object object) {
         unregisterIdlingResource(nameOf(object));
     }
 
-    // TODO this shouldn't create a new resource for this purpose
+    // TODO deal with various Exceptions
+
+    /**
+     * Convenience method for {@link Espresso#unregisterIdlingResources(IdlingResource...)}, which
+     * is the twin of {@link #registerIdlingResource(String)}.
+     *
+     * @param name The name associated with the {@link AmericanoIdlingResource} you wish to
+     *             unregister.
+     */
     public static void unregisterIdlingResource(@NonNull String name) {
-        AmericanoIdlingResource idlingResource = new AmericanoIdlingResource(name);
+        AmericanoIdlingResource idlingResource = mIdlingResourceRegistry.get(name);
         Espresso.unregisterIdlingResources(idlingResource);
+        mIdlingResourceRegistry.remove(name);
     }
 
+    /**
+     * Returns true if we're testing; false otherwise. If true
+     *
+     * @return true if we're testing; false otherwise.
+     */
     private static boolean isTesting() {
         return mIsTesting;
     }
 
-    @VisibleForTesting
-    static void setIsTesting(boolean isTesting) {
+    /**
+     * Set to true if testing / during debug; false in production.
+     *
+     * @param isTesting True if testing / debug; false for production.
+     */
+    public static void setIsTesting(boolean isTesting) {
         mIsTesting = isTesting;
     }
 
+    /**
+     * Resets {@code Americano}'s internal state, for use in a {@code tearDown()}-type method during testing.
+     */
     @VisibleForTesting
-    static void reset() {
-        mMap.clear();
+    public static void reset() {
+        mResourceWatcherRegistry.clear();
+        mIdlingResourceRegistry.clear();
         mIsTesting = true;
     }
 }
