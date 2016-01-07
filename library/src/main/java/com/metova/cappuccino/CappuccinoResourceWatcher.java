@@ -1,6 +1,6 @@
-package com.metova.capuccino;
+package com.metova.cappuccino;
 
-public interface CapuccinoResourceWatcher {
+public interface CappuccinoResourceWatcher {
 
     /**
      * Sets the internal state of the resource to busy, or not idle.

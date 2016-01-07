@@ -1,6 +1,6 @@
-package com.metova.capuccino;
+package com.metova.cappuccino;
 
-public class NoOpCapuccinoResourceWatcher implements CapuccinoResourceWatcher {
+public class NoOpCappuccinoResourceWatcher implements CappuccinoResourceWatcher {
 
     @Override
     public void busy() {

@@ -55,11 +55,11 @@ install {
     repositories.mavenInstaller {
         pom {
             project {
-                artifactId 'capuccino'
+                artifactId 'cappuccino'
                 packaging 'aar'
 
-                name 'Capuccino'
-                url 'https://github.com/metova/Capuccino'
+                name 'cappuccino'
+                url 'https://github.com/metova/Cappuccino'
 
                 licenses {
                     license {
@@ -75,9 +75,9 @@ install {
                     }
                 }
                 scm {
-                    connection 'https://github.com/metova/Capuccino.git'
-                    developerConnection 'https://github.com/metova/Capuccino.git'
-                    url 'https://github.com/metova/Capuccino'
+                    connection 'https://github.com/metova/Cappuccino.git'
+                    developerConnection 'https://github.com/metova/Cappuccino.git'
+                    url 'https://github.com/metova/Cappuccino'
                 }
             }
         }

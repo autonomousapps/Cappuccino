@@ -1,6 +1,6 @@
-package com.metova.capuccino;
+package com.metova.cappuccino;
 
-public class OperatingCapuccinoResourceWatcher implements CapuccinoResourceWatcher {
+public class OperatingCappuccinoResourceWatcher implements CappuccinoResourceWatcher {
 
     private boolean mIsIdle = true;
 

@@ -1,32 +1,32 @@
-package com.metova.capuccino;
+package com.metova.cappuccino;
 
 import android.support.annotation.NonNull;
 import android.support.test.espresso.IdlingResource;
 
-public class CapuccinoIdlingResource implements IdlingResource {
+public class CappuccinoIdlingResource implements IdlingResource {
 
-    private static final String TAG = CapuccinoIdlingResource.class.getSimpleName();
+    private static final String TAG = CappuccinoIdlingResource.class.getSimpleName();
 
     private final String mName;
     private ResourceCallback mCallback;
 
     /**
-     * Instantiates a new {@code CapuccinoResource}, and associates with a name, or key.
+     * Instantiates a new {@code CappuccinoResource}, and associates with a name, or key.
      *
      * @param name The name for this resource.
      */
-    public CapuccinoIdlingResource(@NonNull String name) {
+    public CappuccinoIdlingResource(@NonNull String name) {
         mName = name;
     }
 
     /**
-     * Instantiates a new {@code CapuccinoResource}, and associates with a name, or key,
+     * Instantiates a new {@code CappuccinoResource}, and associates with a name, or key,
      * which is derived from the {@code object} supplied.
      *
      * @param object The object from which to get a name for this resource.
      */
-    public CapuccinoIdlingResource(@NonNull Object object) {
-        mName = Capuccino.nameOf(object);
+    public CappuccinoIdlingResource(@NonNull Object object) {
+        mName = Cappuccino.nameOf(object);
     }
 
     @Override
@@ -36,7 +36,7 @@ public class CapuccinoIdlingResource implements IdlingResource {
 
     @Override
     public boolean isIdleNow() {
-        boolean idle = Capuccino.getResourceWatcher(mName).isIdle();
+        boolean idle = Cappuccino.getResourceWatcher(mName).isIdle();
         if (idle) {
             mCallback.onTransitionToIdle();
         }
