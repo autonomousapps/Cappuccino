@@ -55,7 +55,7 @@ install {
                 packaging 'aar'
 
                 name 'Capuccino'
-                url '' // TODO, e.g. 'https://github.com/metova/capuccino'
+                url 'https://github.com/metova/Capuccino'
 
                 licenses {
                     license {
@@ -71,9 +71,9 @@ install {
                     }
                 }
                 scm {
-                    connection '' // TODO, e.g. 'https://github.com/metova/capuccino.git'
-                    developerConnection '' // TODO, e.g. 'https://github.com/metova/capuccino.git'
-                    url '' // TODO, e.g. 'https://github.com/metova/capuccino'
+                    connection 'https://github.com/metova/Capuccino.git'
+                    developerConnection 'https://github.com/metova/Capuccino.git'
+                    url 'https://github.com/metova/Capuccino'
                 }
             }
         }
