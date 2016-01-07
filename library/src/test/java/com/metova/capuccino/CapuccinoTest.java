@@ -1,4 +1,4 @@
-package com.autonomousapps.espressosandbox.capuccino;
+package com.metova.capuccino;
 
 import org.junit.Before;
 import org.junit.Test;
