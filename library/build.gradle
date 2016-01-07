@@ -1,0 +1,103 @@
+apply plugin: 'com.android.library'
+apply plugin: 'com.github.dcendents.android-maven'
+
+group = 'com.metova'
+version = '0.1'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        minSdkVersion 18
+        targetSdkVersion 23
+        versionName version
+
+        // Required for Espresso tests to run
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        debug {
+            // Run test code coverage reports by default on debug builds
+            testCoverageEnabled = true
+        }
+
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    testOptions {
+        // Allows Android code to be called from unit tests without causing a crash
+        unitTests.returnDefaultValues = true
+    }
+}
+
+dependencies {
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    testCompile 'junit:junit:4.12'
+
+    // Instrumentation tests
+    compile 'com.android.support:support-annotations:23.1.1'
+    compile 'com.android.support.test:runner:0.4.1'
+    compile 'com.android.support.test:rules:0.4.1'
+    compile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    compile 'org.hamcrest:hamcrest-library:1.3'
+}
+
+install {
+    repositories.mavenInstaller {
+        pom {
+            project {
+                artifactId 'capuccino'
+                packaging 'aar'
+
+                name 'Capuccino'
+                url '' // TODO, e.g. 'https://github.com/metova/capuccino'
+
+                licenses {
+                    license {
+                        name 'The Apache Software License, Version 2.0'
+                        url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    }
+                }
+                developers {
+                    developer {
+                        id ''
+                        name 'Tony Robalik'
+                        email 'tony.robalik@metova.com'
+                    }
+                }
+                scm {
+                    connection '' // TODO, e.g. 'https://github.com/metova/capuccino.git'
+                    developerConnection '' // TODO, e.g. 'https://github.com/metova/capuccino.git'
+                    url '' // TODO, e.g. 'https://github.com/metova/capuccino'
+                }
+            }
+        }
+    }
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    destinationDir = file("../javadoc/")
+    failOnError false
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
+}
