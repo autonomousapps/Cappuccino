@@ -33,6 +33,10 @@ android {
         // Allows Android code to be called from unit tests without causing a crash
         unitTests.returnDefaultValues = true
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
 
 dependencies {
@@ -65,7 +69,7 @@ install {
                 }
                 developers {
                     developer {
-                        id ''
+                        id 'trobalik'
                         name 'Tony Robalik'
                         email 'tony.robalik@metova.com'
                     }
