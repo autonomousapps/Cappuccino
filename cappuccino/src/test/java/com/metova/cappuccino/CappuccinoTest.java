@@ -1,5 +1,6 @@
 package com.metova.cappuccino;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,6 +14,11 @@ public class CappuccinoTest {
 
     @Before
     public void setUp() throws Exception {
+
+    }
+
+    @After
+    public void tearDown() throws Exception {
         Cappuccino.reset();
     }
 
@@ -43,5 +49,12 @@ public class CappuccinoTest {
         CappuccinoResourceWatcher watcher = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
 
         assertThat(watcher, is(Cappuccino.getResourceWatcher(ANY_NAME)));
+    }
+
+    @Test(expected = CappuccinoException.class)
+    public void testNoResourceWatcherThrowsException() throws Exception {
+        Cappuccino.setIsTesting(true);
+        Cappuccino.getResourceWatcher(new Object());
+
     }
 }

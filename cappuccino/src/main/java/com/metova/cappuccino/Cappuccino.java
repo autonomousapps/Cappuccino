@@ -6,6 +6,7 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Cappuccino {
@@ -72,7 +73,7 @@ public class Cappuccino {
      * @param object The object associated with the {@link CappuccinoResourceWatcher}.
      * @return the {@code CappuccinoResourceWatcher}, from the internal registry, associated
      * with the given {@param object}.
-     * @throws IllegalArgumentException if there is no {@code CappuccinoResourceWatcher} associated
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
      *                                  with the given {@param object}.
      */
     @NonNull
@@ -87,7 +88,7 @@ public class Cappuccino {
      * @param name The name associated with the {@link CappuccinoResourceWatcher}.
      * @return the {@code CappuccinoResourceWatcher}, from the internal registry, associated
      * with the given {@param name}.
-     * @throws IllegalArgumentException if there is no {@code CappuccinoResourceWatcher} associated
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
      *                                  with the given {@param name}.
      */
     @NonNull
@@ -166,9 +167,14 @@ public class Cappuccino {
 
     /**
      * Resets {@code Cappuccino}'s internal state, for use in a {@code tearDown()}-type method during testing.
+     * This will also ensure that no {@code IdlingResource}s remain registered with Espresso.
      */
     @VisibleForTesting
     public static void reset() {
+        // TODO Is this necessary? My concern is a failing test that, because it fails, does not unregister a resource
+        // TODO this will throw an NPE during a unit test
+//        Espresso.unregisterIdlingResources((IdlingResource[]) Espresso.getIdlingResources().toArray());
+
         mResourceWatcherRegistry.clear();
         mIdlingResourceRegistry.clear();
         mIsTesting = true;
