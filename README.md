@@ -45,7 +45,7 @@ A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources.
                     mTextHello.setVisibility(View.VISIBLE);
                     
                     // ...and this tells Cappuccino that the Activity is now idle, and instrumentation tests
-                    // may not proceed
+                    // may now proceed
                     mCappuccinoResourceWatcher.idle();
                 }
             }, 500 /* delay in ms */);
