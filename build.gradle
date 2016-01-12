@@ -28,9 +28,16 @@ ext {
 
     GROUP = "com.metova"
     VERSION_NAME = "0.2.0"
+
+    BINTRAY_REPO = "maven"
+    BINTRAY_NAME = "cappuccino"
+
+    LIBRARY_DESCRIPTION = "A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources."
+
     POM_PACKAGING = "aar"//"pom"
     POM_DESCRIPTION = "Cappuccino"
     POM_URL = "https://github.com/metova/Cappuccino"
+    POM_ARTIFACT = "cappuccino"
 
     POM_SCM_URL = "https://github.com/metova/Cappuccino"
     POM_SCM_CONNECTION = "scm:git:https://github.com/metova/Cappuccino.git"
@@ -39,6 +46,7 @@ ext {
     POM_LICENSE_NAME = "The Apache Software License, Version 2.0"
     POM_LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0.txt"
     POM_LICENSE_DIST = "repo"
+    ALL_LICENSES = ["Apache-2.0"]
 
     POM_DEVELOPER_ID = "trobalik"
     POM_DEVELOPER_NAME = "Tony Robalik"

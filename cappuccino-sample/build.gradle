@@ -11,6 +11,8 @@ android {
 
         versionCode 1
         versionName rootProject.ext.VERSION_NAME
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
@@ -21,9 +23,19 @@ android {
         sourceCompatibility rootProject.ext.javaVersion
         targetCompatibility rootProject.ext.javaVersion
     }
+
+    lintOptions {
+        abortOnError false
+    }
 }
+
 
 dependencies {
     debugCompile project(':cappuccino')
     releaseCompile project(':cappuccino-no-op')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+    androidTestCompile 'com.android.support.test:runner:0.4.1'
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
 }

@@ -55,6 +55,17 @@ public class CappuccinoTest {
     public void testNoResourceWatcherThrowsException() throws Exception {
         Cappuccino.setIsTesting(true);
         Cappuccino.getResourceWatcher(new Object());
+    }
 
+    @Test(expected = CappuccinoException.class)
+    public void testRegisteringWithoutResourceWatcherThrowsException() throws Exception {
+        Cappuccino.setIsTesting(true);
+        Cappuccino.registerIdlingResource(new Object());
+    }
+
+    @Test(expected = CappuccinoException.class)
+    public void testUnregisteringWithoutResourceWatcherThrowsException() throws Exception {
+        Cappuccino.setIsTesting(true);
+        Cappuccino.registerIdlingResource(new Object());
     }
 }

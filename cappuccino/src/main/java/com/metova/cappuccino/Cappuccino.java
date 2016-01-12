@@ -6,7 +6,6 @@ import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class Cappuccino {
@@ -74,7 +73,7 @@ public class Cappuccino {
      * @return the {@code CappuccinoResourceWatcher}, from the internal registry, associated
      * with the given {@param object}.
      * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
-     *                                  with the given {@param object}.
+     *                             with the given {@param object}.
      */
     @NonNull
     public static CappuccinoResourceWatcher getResourceWatcher(@NonNull Object object) {
@@ -89,16 +88,28 @@ public class Cappuccino {
      * @return the {@code CappuccinoResourceWatcher}, from the internal registry, associated
      * with the given {@param name}.
      * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
-     *                                  with the given {@param name}.
+     *                             with the given {@param name}.
      */
     @NonNull
     public static CappuccinoResourceWatcher getResourceWatcher(@NonNull String name) {
-        if (!mResourceWatcherRegistry.containsKey(name)) {
-            throw new CappuccinoException(
-                    String.format("There is no %s associated with the name %s", CappuccinoResourceWatcher.class.getSimpleName(), name));
-        }
+        throwIfAbsent(name);
 
         return mResourceWatcherRegistry.get(name);
+    }
+
+    /**
+     * Throws {@link CappuccinoException} if no {@link CappuccinoResourceWatcher} has yet been associated with
+     * {@param name}.
+     *
+     * @param name The name associated with the {@link CappuccinoResourceWatcher}.
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
+     *                             with the given {@param name}.
+     */
+    private static void throwIfAbsent(@NonNull String name) {
+        if (!mResourceWatcherRegistry.containsKey(name)) {
+            throw new CappuccinoException(
+                    String.format("There is no %s associated with the name `%s`", CappuccinoResourceWatcher.class.getSimpleName(), name));
+        }
     }
 
     /**
@@ -106,6 +117,8 @@ public class Cappuccino {
      * instantiates an {@link CappuccinoIdlingResource}, then registers it with {@code Espresso}.
      *
      * @param object The object from which to generate an {@code CappuccinoIdlingResource}.
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
+     *                             with the given {@param name}.
      */
     public static void registerIdlingResource(@NonNull Object object) {
         registerIdlingResource(nameOf(object));
@@ -116,8 +129,12 @@ public class Cappuccino {
      * instantiates an {@link CappuccinoIdlingResource}, then registers it with {@code Espresso}.
      *
      * @param name The name from which to generate an {@code CappuccinoIdlingResource}.
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
+     *                             with the given {@param name}.
      */
     public static void registerIdlingResource(@NonNull String name) {
+        throwIfAbsent(name);
+
         CappuccinoIdlingResource idlingResource = new CappuccinoIdlingResource(name);
         mIdlingResourceRegistry.put(name, idlingResource);
         Espresso.registerIdlingResources(idlingResource);
@@ -129,6 +146,8 @@ public class Cappuccino {
      *
      * @param object The object associated with the {@link CappuccinoIdlingResource} you wish to
      *               unregister.
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
+     *                             with the given {@param name}.
      */
     public static void unregisterIdlingResource(@NonNull Object object) {
         unregisterIdlingResource(nameOf(object));
@@ -140,8 +159,12 @@ public class Cappuccino {
      *
      * @param name The name associated with the {@link CappuccinoIdlingResource} you wish to
      *             unregister.
+     * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
+     *                             with the given {@param name}.
      */
     public static void unregisterIdlingResource(@NonNull String name) {
+        throwIfAbsent(name);
+
         CappuccinoIdlingResource idlingResource = mIdlingResourceRegistry.get(name);
         Espresso.unregisterIdlingResources(idlingResource);
         mIdlingResourceRegistry.remove(name);
