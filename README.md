@@ -1,7 +1,10 @@
 # Cappuccino
 A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources.
 
-Sample usage
+##Current version
+0.1
+
+## Sample usage
 
     public class MainActivity extends AppCompatActivity {
 
