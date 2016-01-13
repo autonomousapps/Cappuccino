@@ -2,7 +2,7 @@
 A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources.
 
 ##Current version
-0.1
+0.3.6
 
 ## Sample usage
 
