@@ -1,7 +1,11 @@
 apply plugin: 'com.android.library'
 
-version rootProject.ext.VERSION_NAME
-group rootProject.ext.GROUP
+group = rootProject.ext.GROUP
+version = rootProject.ext.VERSION_NAME
+
+def gitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -10,6 +14,16 @@ android {
     defaultConfig {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
+        versionName version
+
+        buildConfigField "String", "LIBRARY_VERSION", "\"${rootProject.ext.VERSION_NAME}\""
+        buildConfigField "String", "GIT_SHA", "\"${gitSha()}\""
+
+        consumerProguardFiles 'consumer-proguard-rules.pro'
+    }
+
+    lintOptions {
+        abortOnError false
     }
 }
 
@@ -20,6 +34,9 @@ task sourceJar(type: Jar) {
     from 'src/main/java'
 }
 
+// Upload to bintray
+apply from: rootProject.file('gradle/gradle-bintray-install.gradle')
+apply from: rootProject.file('gradle/gradle-bintray-upload.gradle')
 // TODO
 //apply from: rootProject.file('gradle/checkstyle.gradle')
 //apply from: rootProject.file('gradle/gradle-mvn-push.gradle')

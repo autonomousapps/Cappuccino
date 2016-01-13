@@ -10,7 +10,7 @@ install {
         pom.project {
             packaging POM_PACKAGING
             groupId GROUP
-            artifactId POM_ARTIFACT
+            artifactId BINTRAY_NAME
 
             name POM_DESCRIPTION
             description LIBRARY_DESCRIPTION
