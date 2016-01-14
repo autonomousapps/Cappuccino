@@ -110,7 +110,6 @@ public class MainActivityTest {
      * As a convenience, Cappuccino permits the following idiom, which keeps track of 
      * CappuccinoIdlingResources in an internal registry, keyed by the name of the object passed in.
      * In this case, this is our MainActivity, retrieved by calling {@code mActivityTestRule.getActivity()}.
-     * custom IdlingResources, but uses our CappuccinoIdlingResource, instead.
      */
     @Test
     public void testCappuccinoIdlingResource2() throws Exception {
