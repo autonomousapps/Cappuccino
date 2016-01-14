@@ -2,7 +2,28 @@
 A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources.
 
 ##Current version
-0.3.6
+0.4.0
+
+##Getting Started
+In your `build.gradle`:
+```gradle
+debugCompile('com.metova:cappuccino:0.4.0') {
+    transitive false
+}
+releaseCompile 'com.metova:cappuccino-no-op:0.4.0'
+```
+
+You will also want to declare the following Espresso dependencies, if you haven't already:
+```gradle
+androidTestCompile 'com.android.support:support-annotations:23.1.1'
+androidTestCompile 'com.android.support.test:runner:0.4.1'
+androidTestCompile 'com.android.support.test:rules:0.4.1'
+androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+```
+
+Check [here](https://google.github.io/android-testing-support-library/docs/espresso/setup/) for Espresso setup instructions, and to ensure you're using the latest version.
+
+That's it!
 
 ## Sample usage
 
