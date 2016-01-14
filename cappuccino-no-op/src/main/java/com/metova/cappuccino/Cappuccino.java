@@ -21,7 +21,7 @@ public class Cappuccino {
     }
 
     public static CappuccinoResourceWatcher getResourceWatcher(String ignored) {
-        return null;
+        return NO_OP_RESOURCE_WATCHER;
     }
 
     public static void registerIdlingResource(Object ignored) {
