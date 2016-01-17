@@ -24,6 +24,18 @@ public class Cappuccino {
         return NO_OP_RESOURCE_WATCHER;
     }
 
+    public static void markAsBusy(Object ignored) {
+    }
+
+    public static void markAsBusy(String ignored) {
+    }
+
+    public static void markAsIdle(Object ignored) {
+    }
+
+    public static void markAsIdle(String ignored) {
+    }
+
     public static void registerIdlingResource(Object ignored) {
     }
 
