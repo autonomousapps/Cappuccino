@@ -98,6 +98,54 @@ public class Cappuccino {
     }
 
     /**
+     * Marks the {@link CappuccinoResourceWatcher} keyed to the {@param Object} as
+     * {@link CappuccinoResourceWatcher#busy() busy}. A convenience, and directly equivalent
+     * to {@code getResourceWatcher(Object).busy()}.
+     *
+     * @param object The {@code Object} used as the key for the {@code CappuccinoResourceWatcher}
+     *               you want to mark as being busy.
+     */
+    public static void markAsBusy(@NonNull Object object) {
+        markAsBusy(nameOf(object));
+    }
+
+    /**
+     * Marks the {@link CappuccinoResourceWatcher} keyed to the {@param name} as
+     * {@link CappuccinoResourceWatcher#busy() busy}. A convenience, and directly equivalent
+     * to {@code getResourceWatcher(String).busy()}.
+     *
+     * @param name The {@code name} used as the key for the {@code CappuccinoResourceWatcher}
+     *             you want to mark as being busy.
+     */
+    public static void markAsBusy(@NonNull String name) {
+        getResourceWatcher(name).busy();
+    }
+
+    /**
+     * Marks the {@link CappuccinoResourceWatcher} keyed to the {@param Object} as
+     * {@link CappuccinoResourceWatcher#idle() idle}. A convenience, and directly equivalent
+     * to {@code getResourceWatcher(Object).idle()}.
+     *
+     * @param object The {@code Object} used as the key for the {@code CappuccinoResourceWatcher}
+     *               you want to mark as being idle.
+     */
+    public static void markAsIdle(@NonNull Object object) {
+        markAsIdle(nameOf(object));
+    }
+
+    /**
+     * Marks the {@link CappuccinoResourceWatcher} keyed to the {@param name} as
+     * {@link CappuccinoResourceWatcher#idle() idle}. A convenience, and directly equivalent
+     * to {@code getResourceWatcher(String).idle()}.
+     *
+     * @param name The {@code name} used as the key for the {@code CappuccinoResourceWatcher}
+     *             you want to mark as being idle.
+     */
+    public static void markAsIdle(@NonNull String name) {
+        getResourceWatcher(name).idle();
+    }
+
+    /**
      * Throws {@link CappuccinoException} if no {@link CappuccinoResourceWatcher} has yet been associated with
      * {@param name}.
      *

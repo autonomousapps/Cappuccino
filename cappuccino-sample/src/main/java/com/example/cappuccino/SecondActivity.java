@@ -32,7 +32,7 @@ public class SecondActivity extends AppCompatActivity {
                 mTextView.setVisibility(View.VISIBLE);
 
                 // Again using the resource watcher, notify Cappuccino that we're now idle
-                Cappuccino.getResourceWatcher(MainActivity.RESOURCE_MULTIPLE_ACTIVITIES).idle();
+                Cappuccino.markAsIdle(MainActivity.RESOURCE_MULTIPLE_ACTIVITIES);
             }
         }, 500);
     }

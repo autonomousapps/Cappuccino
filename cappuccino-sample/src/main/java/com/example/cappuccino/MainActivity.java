@@ -61,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
         Cappuccino.newIdlingResourceWatcher(RESOURCE_MULTIPLE_ACTIVITIES);
 
         // Tell Cappuccino that the new resource is busy TODO make this more laconic
-        Cappuccino.getResourceWatcher(RESOURCE_MULTIPLE_ACTIVITIES).busy();
+        Cappuccino.markAsBusy(RESOURCE_MULTIPLE_ACTIVITIES);
 
         startActivity(new Intent(this, SecondActivity.class));
     }

@@ -14,7 +14,7 @@ public class CappuccinoTest {
 
     @Before
     public void setUp() throws Exception {
-
+        Cappuccino.setIsTesting(true); // TODO I'm going to remove this method
     }
 
     @After
@@ -24,7 +24,6 @@ public class CappuccinoTest {
 
     @Test
     public void testNewIdlingResourceWatcherOperatingForTesting() throws Exception {
-        Cappuccino.setIsTesting(true);
         CappuccinoResourceWatcher watcher = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
 
         assertThat(watcher, instanceOf(OperatingCappuccinoResourceWatcher.class));
@@ -32,6 +31,7 @@ public class CappuccinoTest {
 
     @Test
     public void testNewIdlingResourceWatcherNoOpForProduction() throws Exception {
+        // TODO remove this test
         Cappuccino.setIsTesting(false);
         CappuccinoResourceWatcher watcher = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
 
@@ -45,27 +45,49 @@ public class CappuccinoTest {
 
     @Test
     public void testGetResourceWatcher() throws Exception {
-        Cappuccino.setIsTesting(true);
         CappuccinoResourceWatcher watcher = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
 
         assertThat(watcher, is(Cappuccino.getResourceWatcher(ANY_NAME)));
     }
 
+    @Test
+    public void testMarkAsBusy() throws Exception {
+        // This test is doing double-duty, testing both the Object and String versions of the method
+        CappuccinoResourceWatcher watcher1 = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
+        CappuccinoResourceWatcher watcher2 = Cappuccino.newIdlingResourceWatcher(new Object());
+
+        Cappuccino.markAsBusy(ANY_NAME);
+        Cappuccino.markAsBusy(new Object());
+
+        assertThat(watcher1.isIdle(), is(false));
+        assertThat(watcher2.isIdle(), is(false));
+    }
+
+    @Test
+    public void testMarkAsIdle() throws Exception {
+        // This test is doing double-duty, testing both the Object and String versions of the method
+        CappuccinoResourceWatcher watcher1 = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
+        CappuccinoResourceWatcher watcher2 = Cappuccino.newIdlingResourceWatcher(new Object());
+
+        Cappuccino.markAsIdle(ANY_NAME);
+        Cappuccino.markAsIdle(new Object());
+
+        assertThat(watcher1.isIdle(), is(true));
+        assertThat(watcher2.isIdle(), is(true));
+    }
+
     @Test(expected = CappuccinoException.class)
     public void testNoResourceWatcherThrowsException() throws Exception {
-        Cappuccino.setIsTesting(true);
         Cappuccino.getResourceWatcher(new Object());
     }
 
     @Test(expected = CappuccinoException.class)
     public void testRegisteringWithoutResourceWatcherThrowsException() throws Exception {
-        Cappuccino.setIsTesting(true);
         Cappuccino.registerIdlingResource(new Object());
     }
 
     @Test(expected = CappuccinoException.class)
     public void testUnregisteringWithoutResourceWatcherThrowsException() throws Exception {
-        Cappuccino.setIsTesting(true);
-        Cappuccino.registerIdlingResource(new Object());
+        Cappuccino.unregisterIdlingResource(new Object());
     }
 }
