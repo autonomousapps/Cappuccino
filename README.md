@@ -2,15 +2,15 @@
 A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources.
 
 ##Current version
-0.4.0
+0.5.0
 
 ##Getting Started
 In your `build.gradle`:
 ```gradle
-debugCompile('com.metova:cappuccino:0.4.0') {
+debugCompile('com.metova:cappuccino:0.5.0') {
     transitive false
 }
-releaseCompile 'com.metova:cappuccino-no-op:0.4.0'
+releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
 ```
 
 You will also want to declare the following Espresso dependencies, if you haven't already:
@@ -121,3 +121,5 @@ public class MainActivityTest {
     }
 }
 ```
+
+Please check on the `cappuccino-sample` module for more sample usages!
