@@ -26,9 +26,6 @@ public class SecondActivity extends AppCompatActivity {
     }
 
     private void initViews() {
-        // Using the resource watcher, notify Cappuccino that we're now busy
-        Cappuccino.getResourceWatcher(MainActivity.RESOURCE_MULTIPLE_ACTIVITIES).busy();
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
