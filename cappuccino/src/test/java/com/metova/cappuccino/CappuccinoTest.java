@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 
@@ -14,28 +13,11 @@ public class CappuccinoTest {
 
     @Before
     public void setUp() throws Exception {
-        Cappuccino.setIsTesting(true); // TODO I'm going to remove this method
     }
 
     @After
     public void tearDown() throws Exception {
         Cappuccino.reset();
-    }
-
-    @Test
-    public void testNewIdlingResourceWatcherOperatingForTesting() throws Exception {
-        CappuccinoResourceWatcher watcher = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
-
-        assertThat(watcher, instanceOf(OperatingCappuccinoResourceWatcher.class));
-    }
-
-    @Test
-    public void testNewIdlingResourceWatcherNoOpForProduction() throws Exception {
-        // TODO remove this test
-        Cappuccino.setIsTesting(false);
-        CappuccinoResourceWatcher watcher = Cappuccino.newIdlingResourceWatcher(ANY_NAME);
-
-        assertThat(watcher, instanceOf(NoOpCappuccinoResourceWatcher.class));
     }
 
     @Test

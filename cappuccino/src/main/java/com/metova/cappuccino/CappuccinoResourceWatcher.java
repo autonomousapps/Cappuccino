@@ -1,21 +1,29 @@
 package com.metova.cappuccino;
 
-public interface CappuccinoResourceWatcher {
+public class CappuccinoResourceWatcher {
+
+    private boolean mIsIdle = true;
 
     /**
      * Sets the internal state of the resource to busy, or not idle.
      */
-    void busy();
+    public void busy() {
+        mIsIdle = false;
+    }
 
     /**
      * Sets the internal state of the resource to idle; that is, not busy.
      */
-    void idle();
+    public void idle() {
+        mIsIdle = true;
+    }
 
     /**
      * Returns the busy/idle ({@code false}/{@code true}) state of the resource.
      *
      * @return the busy/idle ({@code false}/{@code true}) state of the resource.
      */
-    boolean isIdle();
+    public boolean isIdle() {
+        return mIsIdle;
+    }
 }

@@ -10,8 +10,6 @@ import java.util.Map;
 
 public class Cappuccino {
 
-    private static boolean mIsTesting = true;
-
     // TODO find an elegant way to remove items from this map once they are no longer needed
     private static final Map<String, CappuccinoResourceWatcher> mResourceWatcherRegistry = new HashMap<>();
 
@@ -20,8 +18,7 @@ public class Cappuccino {
     /**
      * Returns a new {@code CappuccinoResourceWatcher}, which will be associated internally with a name derived from
      * {@param resource}. Internally, this uses either the canonical or simple name of the resource's class,
-     * but this may change. Will return either a {@link OperatingCappuccinoResourceWatcher} if we're testing, or a
-     * {@link NoOpCappuccinoResourceWatcher} if we're in production. See {@link #isTesting()}.
+     * but this may change.
      *
      * @param resource The object for which this {@link CappuccinoResourceWatcher} will be a member.
      * @return an {@link CappuccinoResourceWatcher}.
@@ -33,20 +30,13 @@ public class Cappuccino {
 
     /**
      * Returns a new {@code CappuccinoResourceWatcher}, which will be associated internally with the name supplied.
-     * Will return either a {@link OperatingCappuccinoResourceWatcher} if we're testing, or a {@link NoOpCappuccinoResourceWatcher}
-     * if we're in production. See {@link #isTesting()}.
      *
      * @param name The name of this {@link CappuccinoResourceWatcher}.
      * @return an {@link CappuccinoResourceWatcher}.
      */
     @NonNull
     public static CappuccinoResourceWatcher newIdlingResourceWatcher(@NonNull String name) {
-        CappuccinoResourceWatcher watcher;
-        if (isTesting()) {
-            watcher = new OperatingCappuccinoResourceWatcher();
-        } else {
-            watcher = new NoOpCappuccinoResourceWatcher();
-        }
+        CappuccinoResourceWatcher watcher = new CappuccinoResourceWatcher();
         mResourceWatcherRegistry.put(name, watcher);
         return watcher;
     }
@@ -219,24 +209,6 @@ public class Cappuccino {
     }
 
     /**
-     * Returns true if we're testing; false otherwise. If true
-     *
-     * @return true if we're testing; false otherwise.
-     */
-    private static boolean isTesting() {
-        return mIsTesting;
-    }
-
-    /**
-     * Set to true if testing / during debug; false in production.
-     *
-     * @param isTesting True if testing / debug; false for production.
-     */
-    public static void setIsTesting(boolean isTesting) {
-        mIsTesting = isTesting;
-    }
-
-    /**
      * Resets {@code Cappuccino}'s internal state, for use in a {@code tearDown()}-type method during testing.
      * This will also ensure that no {@code IdlingResource}s remain registered with Espresso.
      */
@@ -248,6 +220,5 @@ public class Cappuccino {
 
         mResourceWatcherRegistry.clear();
         mIdlingResourceRegistry.clear();
-        mIsTesting = true;
     }
 }
