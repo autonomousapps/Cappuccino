@@ -101,7 +101,7 @@ public class MainActivityTest {
         CappuccinoIdlingResource idlingResource = new CappuccinoIdlingResource(mActivityTestRule.getActivity());
         Espresso.registerIdlingResources(idlingResource);
         
-        onView(ViewMatchers.withId(R.id.text_hello)).check(matches(isDisplayed()));
+        onView(withId(R.id.text_hello)).check(matches(isDisplayed()));
 
         Espresso.unregisterIdlingResources(idlingResource);
     }
