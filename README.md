@@ -122,4 +122,4 @@ public class MainActivityTest {
 }
 ```
 
-Please check on the `cappuccino-sample` module for more sample usages!
+Please check out the `cappuccino-sample` module for more sample usages!
