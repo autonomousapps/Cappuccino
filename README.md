@@ -1,5 +1,5 @@
 # Cappuccino
-A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources.
+A sweeter Espresso. Never write your own IdlingResource again.
 
 ##Current version
 0.5.0
