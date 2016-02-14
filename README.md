@@ -15,19 +15,14 @@ repositories {
 ```
 
 ```gradle
-android {
-
-    // ...other configuration blocks...
-
-    dependencies {
-        
-        // ...other dependencies...
-        
-        debugCompile('com.metova:cappuccino:0.5.0') {
-            transitive false
-        }
-        releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
+dependencies {
+    
+    // ...other dependencies...
+    
+    debugCompile('com.metova:cappuccino:0.5.0') {
+        transitive false
     }
+    releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
 }
 ```
 
