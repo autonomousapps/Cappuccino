@@ -7,10 +7,28 @@ A sweeter Espresso. Never write your own IdlingResource again.
 ##Getting Started
 In your `build.gradle`:
 ```gradle
-debugCompile('com.metova:cappuccino:0.5.0') {
-    transitive false
+repositories {
+    // Either repository will work
+    mavenCentral()
+    jcenter()
 }
-releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
+```
+
+```gradle
+android {
+
+    // ...other configuration blocks...
+
+    dependencies {
+        
+        // ...other dependencies...
+        
+        debugCompile('com.metova:cappuccino:0.5.0') {
+            transitive false
+        }
+        releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
+    }
+}
 ```
 
 You will also want to declare the following Espresso dependencies, if you haven't already:
