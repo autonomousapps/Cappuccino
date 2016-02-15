@@ -103,6 +103,7 @@ public class MainActivityTest {
         Cappuccino.reset();
     }
 
+    @Rule
     private ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
 
     /**
