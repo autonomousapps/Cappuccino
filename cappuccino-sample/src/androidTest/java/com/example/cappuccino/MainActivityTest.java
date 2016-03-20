@@ -82,4 +82,15 @@ public class MainActivityTest {
                 .not().isFocusable()
                 .isClickable();
     }
+
+    @Test
+    public void testFluentToEspressoInteraction() throws Exception {
+        CappuccinoInteraction.onView()
+                .withId(R.id.text_fluent)
+                .toEspresso().check(matches(isDisplayed()));
+
+        CappuccinoInteraction.onView()
+                .withId(R.id.text_fluent)
+                .espressoCheck(matches(isDisplayed()));
+    }
 }
