@@ -24,7 +24,19 @@
         android:layout_above="@id/button_second_activity"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="24dp"
-        android:text="Hello, World!"
-        android:visibility="gone" />
+        android:text="@string/hello"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/text_fluent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/button_second_activity"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:clickable="true"
+        android:focusable="false"
+        android:text="@string/text_fluent" />
 
 </RelativeLayout>

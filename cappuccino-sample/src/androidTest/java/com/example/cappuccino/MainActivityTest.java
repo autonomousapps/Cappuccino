@@ -2,6 +2,7 @@ package com.example.cappuccino;
 
 import com.metova.cappuccino.Cappuccino;
 import com.metova.cappuccino.CappuccinoIdlingResource;
+import com.metova.cappuccino.fluent.CappuccinoInteraction;
 
 import org.junit.After;
 import org.junit.Before;
@@ -69,5 +70,16 @@ public class MainActivityTest {
 
         // Unregister the IdlingResource
         Cappuccino.unregisterIdlingResource(MainActivity.RESOURCE_MULTIPLE_ACTIVITIES);
+    }
+
+    @Test
+    public void testFluentInteraction() throws Exception {
+        CappuccinoInteraction.onView()
+                .withId(R.id.text_fluent)
+                .withText(R.string.text_fluent)
+                .check()
+                .isDisplayed()
+                .not().isFocusable()
+                .isClickable();
     }
 }
