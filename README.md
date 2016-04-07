@@ -20,7 +20,7 @@ dependencies {
     // ...other dependencies...
     
     debugCompile('com.metova:cappuccino:0.5.0') {
-        transitive false
+        transitive = false
     }
     releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
 }
