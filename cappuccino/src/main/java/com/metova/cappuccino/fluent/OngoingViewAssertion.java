@@ -52,23 +52,36 @@ public class OngoingViewAssertion {
         return result;
     }
 
-    public OngoingViewAssertion doesNotExist() {
-        viewInteraction().check(ViewAssertions.doesNotExist());
+    // TODO this check would normally return a ViewInteraction, but do I want/need to permit that?
+    public void doesNotExist() {
+        mViewInteraction = viewInteraction().check(ViewAssertions.doesNotExist());
+    }
+
+    /**
+     * For use with custom View Matchers.
+     *
+     * @param customViewMatcher the custom view matcher.
+     * @return An OngoingViewInteraction for continuing to check against.
+     */
+    public OngoingViewAssertion is(Matcher<View> customViewMatcher) {
+        mViewInteraction = viewInteraction().check(ViewAssertions.matches(compose(customViewMatcher)));
         return this;
     }
 
     public OngoingViewAssertion isDisplayed() {
-        viewInteraction().check(ViewAssertions.matches(compose(ViewMatchers.isDisplayed())));
+        mViewInteraction = viewInteraction().check(ViewAssertions.matches(compose(ViewMatchers.isDisplayed())));
         return this;
     }
 
     public OngoingViewAssertion isClickable() {
-        viewInteraction().check(ViewAssertions.matches(compose(ViewMatchers.isClickable())));
+        mViewInteraction = viewInteraction().check(ViewAssertions.matches(compose(ViewMatchers.isClickable())));
         return this;
     }
 
     public OngoingViewAssertion isFocusable() {
-        viewInteraction().check(ViewAssertions.matches(compose(ViewMatchers.isFocusable())));
+        mViewInteraction = viewInteraction().check(ViewAssertions.matches(compose(ViewMatchers.isFocusable())));
         return this;
     }
+
+
 }

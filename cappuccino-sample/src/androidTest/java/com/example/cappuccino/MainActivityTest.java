@@ -3,13 +3,17 @@ package com.example.cappuccino;
 import com.metova.cappuccino.Cappuccino;
 import com.metova.cappuccino.CappuccinoIdlingResource;
 import com.metova.cappuccino.fluent.CappuccinoInteraction;
+import com.metova.cappuccino.fluent.OngoingInteraction;
 
+import org.hamcrest.Matchers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import android.content.Intent;
 import android.support.test.espresso.Espresso;
+import android.support.test.espresso.assertion.ViewAssertions;
+import android.support.test.espresso.matcher.ViewMatchers;
 import android.support.test.rule.ActivityTestRule;
 
 import static android.support.test.espresso.Espresso.onView;
@@ -17,6 +21,8 @@ import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.Matchers.allOf;
 
 public class MainActivityTest {
 
@@ -73,14 +79,45 @@ public class MainActivityTest {
     }
 
     @Test
+    public void testFluentInteraction2() throws Exception {
+        // There is an implied "allOf(...)" relationship when matching
+
+        OngoingInteraction.onView()
+                .withId(R.id.text_fluent)
+                .withText(R.string.text_fluent)
+//                .beginAssert()
+                .check()
+                .isDisplayed()
+                .not().isFocusable()
+                .isClickable();
+//                .endAssert();
+    }
+
+    @Test
+    public void testFluentInteractionDoesNotExist() throws Exception {
+        // There is an implied "allOf(...)" relationship when matching
+
+        OngoingInteraction.onView()
+                .withId(R.id.text_hello)
+                .withText(R.string.hello)
+                .beginAssert()
+//                .check()
+                .doesNotExist()
+                .endAssert();
+    }
+
+    @Test
     public void testFluentInteraction() throws Exception {
+        // There is an implied "allOf(...)" relationship when matching
+
         CappuccinoInteraction.onView()
                 .withId(R.id.text_fluent)
                 .withText(R.string.text_fluent)
                 .check()
                 .isDisplayed()
                 .not().isFocusable()
-                .isClickable();
+                .is(ViewMatchers.isClickable()); // a "custom" ViewMatcher
+//                .isClickable();
     }
 
     @Test
