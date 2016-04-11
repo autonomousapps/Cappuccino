@@ -21,10 +21,10 @@ dependencies {
     
     // ...other dependencies...
     
-    debugCompile('com.metova:cappuccino:0.5.0') {
+    debugCompile('com.metova:cappuccino:0.6.0') {
         transitive = false
     }
-    releaseCompile 'com.metova:cappuccino-no-op:0.5.0'
+    releaseCompile 'com.metova:cappuccino-no-op:0.6.0'
 }
 ```
 
