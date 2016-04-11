@@ -58,7 +58,7 @@ For automatic disabling and re-enabling system animations, there are (unfortunat
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Disable animations on debug builds so that the animations do not interfere with Espresso
-             tests.  Adding this permission to the manifest is not sufficient - you must also grant the
+             tests. Adding this permission to the manifest is not sufficient - you must also grant the
              permission over adb! -->
     <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
 
