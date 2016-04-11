@@ -47,7 +47,7 @@ That's it! (mostly)
 
 ## Automatically disable and re-enable system animations
 For automatic disabling and re-enabling system animations, there are (unfortunately) several steps to follow at this time. In summary, they are:
- 1. Create or modify a `[FlavorName]debug/AndroidManifest.xml`, as below
+ 1. Create or modify a `debug/AndroidManifest.xml` or (`[flavor]Debug/AndroidManifest.xml` for each flavor, if you have them), as below
  2. Modify your app's `build.gradle` file, as below
  3. Add [this file](https://github.com/metova/Cappuccino/blob/master/cappuccino-sample/gradle/grant-animations-permission.gradle) to a (probably new) directory `app/gradle`
  4. Add some code to your test classes, as below
