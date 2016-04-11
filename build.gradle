@@ -27,12 +27,12 @@ ext {
     javaVersion = JavaVersion.VERSION_1_7
 
     GROUP = "com.metova"
-    VERSION_NAME = "0.5.0"
+    VERSION_NAME = "0.6.0"
 
     BINTRAY_REPO = "maven"
 //    BINTRAY_NAME = "cappuccino"
 
-    LIBRARY_DESCRIPTION = "A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources."
+    LIBRARY_DESCRIPTION = "A sweeter Espresso. Cappuccino makes it easy to add custom IdlingResources, and enables the automatic turning off and on of system animations."
 
     POM_PACKAGING = "aar"//"pom"
 //    POM_DESCRIPTION = "Cappuccino"

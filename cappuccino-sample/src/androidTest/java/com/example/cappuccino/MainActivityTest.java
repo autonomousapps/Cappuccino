@@ -2,12 +2,17 @@ package com.example.cappuccino;
 
 import com.metova.cappuccino.Cappuccino;
 import com.metova.cappuccino.CappuccinoIdlingResource;
+import com.metova.cappuccino.SystemAnimations;
 
 import org.junit.After;
+import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
 
 import android.content.Intent;
+import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
 
@@ -19,7 +24,18 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 
 public class MainActivityTest {
 
-    ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
+    @Rule
+    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, false);
+
+    @BeforeClass
+    public static void setupTest() {
+        SystemAnimations.disableAll(InstrumentationRegistry.getContext());
+    }
+
+    @AfterClass
+    public static void teardownTest() {
+        SystemAnimations.enableAll(InstrumentationRegistry.getContext());
+    }
 
     @Before
     public void setUp() throws Exception {
