@@ -66,6 +66,8 @@ For automatic disabling and re-enabling system animations, there are (unfortunat
 ```
 
 ### Addition to `app/build.gradle` file
+Add this to the bottom of your build script:
+
 ```gradle
 apply from: project.file("gradle/grant-animations-permission.gradle")
 ```
