@@ -1,8 +1,10 @@
 # Cappuccino
-A sweeter Espresso. Never write your own IdlingResource again.
+A sweeter Espresso. At present, there are two main features of Cappuccino:
+ 1. Never write your own IdlingResource again.
+ 2. By using the `SystemAnimations` class, along with some code snippets provided below, you can automatically disable and re-enable system animations--never again worry about running an Espresso test without manually disabling animations.
 
 ##Current version
-0.5.0
+0.6.0
 
 ##Getting Started
 In your `build.gradle`:
@@ -28,15 +30,65 @@ dependencies {
 
 You will also want to declare the following Espresso dependencies, if you haven't already:
 ```gradle
-androidTestCompile 'com.android.support:support-annotations:23.1.1'
-androidTestCompile 'com.android.support.test:runner:0.4.1'
-androidTestCompile 'com.android.support.test:rules:0.4.1'
-androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+dependencies {
+
+    // ...other dependencies...
+
+    androidTestCompile 'com.android.support:support-annotations:23.1.1'
+    androidTestCompile 'com.android.support.test:runner:0.4.1'
+    androidTestCompile 'com.android.support.test:rules:0.4.1'
+    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.1'
+}
 ```
 
 Check [here](https://google.github.io/android-testing-support-library/docs/espresso/setup/) for Espresso setup instructions, and to ensure you're using the latest version.
 
-That's it!
+That's it! (mostly)
+
+## For automatic disabling and re-enabling system animations, there are (unfortunately) several steps to follow at this time. In summary, they are:
+ 1. Create or modify a `[FlavorName]debug/AndroidManifest.xml`, as below
+ 2. Modify your app's `build.gradle` file, as below
+ 3. Add [this file](https://github.com/metova/Cappuccino/blob/master/cappuccino-sample/gradle/grant-animations-permission.gradle) to a (probably new) directory `app/gradle`
+ 4. Add some code to your test classes, as below
+
+### Sample `debug/AndroidManifest.xml`
+```
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Disable animations on debug builds so that the animations do not interfere with Espresso
+             tests.  Adding this permission to the manifest is not sufficient - you must also grant the
+             permission over adb! -->
+    <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
+
+</manifest>
+```
+
+### Addition to `app/build.gradle` file
+```gradle
+apply from: project.file("gradle/grant-animations-permission.gradle")
+```
+
+### Sample test class
+If you have all of your test classes inherit from this class, then you only need to do the following once.
+
+```java
+import com.metova.cappuccino.SystemAnimations;
+
+public class BaseTestClass {
+    @BeforeClass
+    public static void disableAnimations() {
+        SystemAnimations.disableAll(InstrumentationRegistry.getContext());
+    }
+
+    @AfterClass
+    public static void enableAnimations() {
+        SystemAnimations.enableAll(InstrumentationRegistry.getContext());
+    }
+    
+    // ...test code...
+}
+```
 
 ## Sample usage
 
@@ -92,6 +144,18 @@ public class MainActivity extends AppCompatActivity {
 
 ```java
 public class MainActivityTest {
+
+    // optional
+    @BeforeClass
+    public static void disableAnimations() {
+        SystemAnimations.disableAll(InstrumentationRegistry.getContext());
+    }
+
+    // optional
+    @AfterClass
+    public static void enableAnimations() {
+        SystemAnimations.enableAll(InstrumentationRegistry.getContext());
+    }
 
     @Before
     public void setUp() throws Exception {
