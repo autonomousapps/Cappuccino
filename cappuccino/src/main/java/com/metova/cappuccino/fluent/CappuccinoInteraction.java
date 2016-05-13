@@ -5,7 +5,7 @@ public class CappuccinoInteraction {
     private static OngoingViewInteraction sOngoingViewInteraction = null;
 
     public static OngoingViewInteraction onView() {
-        sOngoingViewInteraction = new OngoingViewInteraction();
+        sOngoingViewInteraction = new OngoingFinder();
         return sOngoingViewInteraction;
     }
 }

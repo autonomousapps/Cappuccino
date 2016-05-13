@@ -79,34 +79,6 @@ public class MainActivityTest {
     }
 
     @Test
-    public void testFluentInteraction2() throws Exception {
-        // There is an implied "allOf(...)" relationship when matching
-
-        OngoingInteraction.onView()
-                .withId(R.id.text_fluent)
-                .withText(R.string.text_fluent)
-//                .beginAssert()
-                .check()
-                .isDisplayed()
-                .not().isFocusable()
-                .isClickable();
-//                .endAssert();
-    }
-
-    @Test
-    public void testFluentInteractionDoesNotExist() throws Exception {
-        // There is an implied "allOf(...)" relationship when matching
-
-        OngoingInteraction.onView()
-                .withId(R.id.text_hello)
-                .withText(R.string.hello)
-                .beginAssert()
-//                .check()
-                .doesNotExist()
-                .endAssert();
-    }
-
-    @Test
     public void testFluentInteraction() throws Exception {
         // There is an implied "allOf(...)" relationship when matching
 
@@ -117,17 +89,17 @@ public class MainActivityTest {
                 .isDisplayed()
                 .not().isFocusable()
                 .is(ViewMatchers.isClickable()); // a "custom" ViewMatcher
-//                .isClickable();
     }
 
     @Test
-    public void testFluentToEspressoInteraction() throws Exception {
-        CappuccinoInteraction.onView()
-                .withId(R.id.text_fluent)
-                .toEspresso().check(matches(isDisplayed()));
+    public void testFluentInteractionDoesNotExist() throws Exception {
+        // There is an implied "allOf(...)" relationship when matching
 
         CappuccinoInteraction.onView()
-                .withId(R.id.text_fluent)
-                .espressoCheck(matches(isDisplayed()));
+                .withId(R.id.text_hello)
+                .withText(R.string.hello)
+                .isDisplayed()
+                .check()
+                .doesNotExist();
     }
 }

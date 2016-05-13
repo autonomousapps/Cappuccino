@@ -17,17 +17,6 @@ import java.util.Set;
 
 public class OngoingInteraction {
 
-    // TODO setup a proper state machine
-    private enum State {
-        FINDING,
-        PERFORMING,
-        CHECKING_CONTINUOUS,
-        CHECKING_ONCE_START,
-        CHECKING_ONCE_END
-    }
-
-    private State mState;
-
     private static OngoingInteraction sCurrentInstance;
 
     private boolean mIsNot = false;
@@ -45,48 +34,19 @@ public class OngoingInteraction {
     }
 
     private OngoingInteraction() {
-        mState = State.FINDING;
     }
 
     // Main entry point into ViewAssertions
     public OngoingInteraction check() {
-        mState = State.CHECKING_CONTINUOUS;
-
         ViewInteraction interaction = Espresso.onView(Matchers.allOf(matchersAsArray()));
         setViewInteraction(interaction);
         clearMatchers(); // reset for next phase
         return this;
-    }
-
-    public OngoingInteraction beginAssert() {
-        mState = State.CHECKING_ONCE_START;
-
-        ViewInteraction interaction = Espresso.onView(Matchers.allOf(matchersAsArray()));
-        setViewInteraction(interaction);
-        clearMatchers(); // reset for next phase
-        return this;
-    }
-
-    public void endAssert() {
-        mState = State.CHECKING_ONCE_END;
-
-        getViewInteraction().check(ViewAssertions.matches(Matchers.allOf(matchersAsArray())));
     }
 
     private OngoingInteraction doCheck() {
-        switch (mState) {
-            case CHECKING_CONTINUOUS:
-                getViewInteraction().check(ViewAssertions.matches(Matchers.allOf(matchersAsArray())));
-                clearMatchers();
-
-                break;
-
-            // TODO anything?
-            case CHECKING_ONCE_START:
-            case CHECKING_ONCE_END:
-                break;
-        }
-
+        getViewInteraction().check(ViewAssertions.matches(Matchers.allOf(matchersAsArray())));
+        clearMatchers();
         return this;
     }
 
@@ -120,11 +80,10 @@ public class OngoingInteraction {
 
     public OngoingInteraction doesNotExist() {
         // not valid if there are any matchers or if we're not in one of the CHECKING states
-        if (mIsNot || mMatchers.size() > 0 || mState == State.FINDING || mState == State.PERFORMING) {
-            throw new IllegalStateException("Cannot make this assertion in conjunction with any other assertion");
-        }
+//        if (mIsNegated || mMatchers.size() > 0 || mState == State.FINDING || mState == State.PERFORMING) {
+//            throw new IllegalStateException("Cannot make this assertion in conjunction with any other assertion");
+//        }
         getViewInteraction().check(ViewAssertions.doesNotExist());
-        mState = State.CHECKING_ONCE_END;
         return this;
     }
 
