@@ -1,1 +1,1 @@
-include ':cappuccino', ':cappuccino-no-op', ':cappuccino-sample'
+include ':cappuccino', ':cappuccino-no-op', ':cappuccino-sample', ':cappuccino-plugin'

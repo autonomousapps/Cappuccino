@@ -1,0 +1,46 @@
+plugins {
+    id "com.gradle.plugin-publish" version "0.9.4"
+    id "groovy"
+    id "java"
+    id "maven"
+}
+
+group 'com.metova'
+version '0.6'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    // Gradle Plugin
+    compile gradleApi()
+    compile localGroovy()
+
+    // Test deps
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+// region plugin setup
+pluginBundle {
+    website = 'https://github.com/metova/Cappuccino'
+    vcsUrl = 'https://github.com/metova/Cappuccino'
+    description = 'A sweeter Espresso. Never write your own IdlingResource again. Never manually turn off system animations again.'
+    tags = ['android', 'espresso', 'idlingresource']
+
+    plugins {
+        cappuccinoAnimationsPlugin {
+            id = 'com.metova.cappuccino-animations'
+            displayName = 'Cappuccino Animations plugin'
+        }
+    }
+}
+
+// Temporary
+//uploadArchives {
+//    repositories {
+//        mavenDeployer {
+//            repository(url: uri('repo'))
+//        }
+//    }
+//}
