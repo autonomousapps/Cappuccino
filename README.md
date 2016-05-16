@@ -67,12 +67,19 @@ For automatic disabling and re-enabling system animations, there are (unfortunat
 ### Apply the Cappuccino Animations plugin at the top of your `build.gradle`:
 
 ```gradle
-plugins {
-    id 'com.metova.cappuccino-animations' version '0.7.1'
+buildscript {
+  repositories {
+    maven {
+      url "https://plugins.gradle.org/m2/"
+    }
+  }
+  dependencies {
+    classpath "gradle.plugin.com.metova:cappuccino-plugin:0.7.1"
+  }
 }
-```
 
-Or, if you do not wish to use the new plugin mechanism, follow the instructions [here](https://plugins.gradle.org/plugin/com.metova.cappuccino-animations) for the old way.
+apply plugin: "com.metova.cappuccino-animations"
+```
 
 ### Sample test class
 If you have all of your test classes inherit from this class, then you only need to do the following once.
