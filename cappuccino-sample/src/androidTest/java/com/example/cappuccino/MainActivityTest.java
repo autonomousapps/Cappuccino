@@ -35,6 +35,7 @@ public class MainActivityTest {
     @AfterClass
     public static void teardownTest() {
         SystemAnimations.enableAll(InstrumentationRegistry.getContext());
+//        SystemAnimations.restoreAll(InstrumentationRegistry.getContext());
     }
 
     @Before
