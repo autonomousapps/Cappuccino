@@ -68,7 +68,7 @@ For automatic disabling and re-enabling system animations, there are (unfortunat
 
 ```gradle
 plugins {
-    id 'com.metova.cappuccino-animations' version '0.7'
+    id 'com.metova.cappuccino-animations' version '0.7.1'
 }
 ```
 
