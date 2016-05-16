@@ -1,7 +1,7 @@
 # Cappuccino
 A sweeter Espresso. At present, there are two main features of Cappuccino:
  1. Never write your own IdlingResource again.
- 2. By using the `SystemAnimations` class, along with some code snippets provided below, you can automatically disable and re-enable system animations--never again worry about running an Espresso test without manually disabling animations.
+ 2. By using the `SystemAnimations` class, along with the new [Cappuccino Animations Gradle plugin](https://plugins.gradle.org/plugin/com.metova.cappuccino-animations), you can automatically disable and re-enable system animations--never again worry about running an Espresso test without manually disabling animations.
 
 ##Current version
 0.6.0
@@ -46,11 +46,10 @@ Check [here](https://google.github.io/android-testing-support-library/docs/espre
 That's it! (mostly)
 
 ## Automatically disable and re-enable system animations
-For automatic disabling and re-enabling system animations, there are (unfortunately) several steps to follow at this time. In summary, they are:
+For automatic disabling and re-enabling system animations, there are (unfortunately) several steps to follow. In summary, they are:
  1. Create or modify a `debug/AndroidManifest.xml` or (`[flavor]Debug/AndroidManifest.xml` for each flavor, if you have them), as below
- 2. Modify your app's `build.gradle` file, as below
- 3. Add [this file](https://github.com/metova/Cappuccino/blob/master/cappuccino-sample/gradle/grant-animations-permission.gradle) to a (probably new) directory `app/gradle`
- 4. Add some code to your test classes, as below
+ 2. Apply the Cappuccino Animations plugin
+ 3. Add some code to your test classes, as below
 
 ### Sample `debug/AndroidManifest.xml`
 ```
@@ -65,12 +64,15 @@ For automatic disabling and re-enabling system animations, there are (unfortunat
 </manifest>
 ```
 
-### Addition to `app/build.gradle` file
-Add this to the bottom of your build script:
+### Apply the Cappuccino Animations plugin at the top of your `build.gradle`:
 
 ```gradle
-apply from: project.file("gradle/grant-animations-permission.gradle")
+plugins {
+    id 'com.metova.cappuccino-animations' version '0.7'
+}
 ```
+
+Or, if you do not wish to use the new plugin mechanism, follow the instructions [here](https://plugins.gradle.org/plugin/com.metova.cappuccino-animations) for the old way.
 
 ### Sample test class
 If you have all of your test classes inherit from this class, then you only need to do the following once.
