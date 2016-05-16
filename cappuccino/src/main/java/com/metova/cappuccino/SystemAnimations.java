@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 
 import java.lang.reflect.Method;
 
@@ -12,32 +13,36 @@ import java.lang.reflect.Method;
  */
 public final class SystemAnimations {
 
+    private static SystemAnimations INSTANCE = null;
+
     private static final String ANIMATION_PERMISSION = Manifest.permission.SET_ANIMATION_SCALE;//"android.permission.SET_ANIMATION_SCALE";
     private static final float DISABLED = 0.0f;
     private static final float DEFAULT = 1.0f;
 
-    private final Context context;
-
     public SystemAnimations(Context context) {
-        this.context = context;
-    }
-
-    public void disableAll() {
         int permStatus = context.checkCallingOrSelfPermission(ANIMATION_PERMISSION);
-        if (permStatus == PackageManager.PERMISSION_GRANTED) {
-            setSystemAnimationsScale(DISABLED);
-        } else {
+        if (permStatus != PackageManager.PERMISSION_GRANTED) {
             throw new IllegalStateException("Application not granted access to animations");
         }
     }
 
-    public void enableAll() {
-        int permStatus = context.checkCallingOrSelfPermission(ANIMATION_PERMISSION);
-        if (permStatus == PackageManager.PERMISSION_GRANTED) {
-            setSystemAnimationsScale(DEFAULT);
-        } else {
-            throw new IllegalStateException("Application not granted access to animations");
+    private static SystemAnimations getInstance(@NonNull Context context) {
+        if (INSTANCE == null) {
+            synchronized (SystemAnimations.class) {
+                if (INSTANCE == null) {
+                    INSTANCE = new SystemAnimations(context);
+                }
+            }
         }
+        return INSTANCE;
+    }
+
+    private void disableAll() {
+        setSystemAnimationsScale(DISABLED);
+    }
+
+    private void enableAll() {
+        setSystemAnimationsScale(DEFAULT);
     }
 
     private void setSystemAnimationsScale(float animationScale) {
@@ -63,10 +68,10 @@ public final class SystemAnimations {
     }
 
     public static void disableAll(Context context) {
-        new SystemAnimations(context).disableAll();
+        getInstance(context).disableAll();
     }
 
     public static void enableAll(Context context) {
-        new SystemAnimations(context).enableAll();
+        getInstance(context).enableAll();
     }
 }
