@@ -22,11 +22,10 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
     // This code block runs after the build script has been 'evaluated' (i.e., after the Configuration phase)
     // It first gets the list of connected devices by executing a process that runs `adb devices` and parses the result.
     // Then, it iterates through all the "application variants", which are the combination of build type and flavor.
-    // So, for our project, the variants are usDebug, caDebug, usRelease, and caRelease. It ignores the 'release' variants.
     // It then dynamically generates a task for each combination of variant and connected device. If there are two variants
-    // (usDebug and caDebug) and two connected devices (say, with IDs 1000 and 2000), then it will generate four tasks with
-    // names grantAnimationPermissionUsDebugWithId1000, .... It then sets those dynamically-created tasks as dependencies
-    // for assemble*AndroidTest (e.g., assembleUsDebugAndroidTest).
+    // (flavor1Debug and flavor2Debug) and two connected devices (say, with IDs 1000 and 2000), then it will generate four tasks with
+    // names grantAnimationPermissionFlavor1DebugWithId1000, .... It then sets those dynamically-created tasks as dependencies
+    // for assemble*AndroidTest (e.g., assembleFlavor1DebugAndroidTest).
     @SuppressWarnings("GroovyAssignabilityCheck")
     @Override
     void apply(Project project) {
@@ -90,7 +89,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
             dependsOn "install${variantName.capitalize()}"
 
             //noinspection GrUnresolvedAccess
-            commandLine "${getAdbExe()} -s $deviceId shell pm grant $applicationId android.permission.SET_ANIMATION_SCALE".split(' ') // TODO tsr: make it work with Windows
+            commandLine "${getAdbExe()} -s $deviceId shell pm grant $applicationId android.permission.SET_ANIMATION_SCALE".split(' ') // TODO make it work with Windows
         }
 
         // I would really love if this worked

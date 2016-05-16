@@ -1,5 +1,5 @@
 plugins {
-    id 'com.metova.cappuccino-animations' version '0.7'
+    id 'com.metova.cappuccino-animations' version '0.7.1'
 }
 
 apply plugin: 'com.android.application'
