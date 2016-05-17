@@ -108,13 +108,21 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
         Process p = "${getAdbExe()} devices".execute()
         p.waitFor() // TODO tsr: check exit value and deal with InterruptedException?
 
+        boolean doParse = false;
         def devices = []
-        p.in.eachLine { line, number ->                           // #eachLine() handles resource opening and closing automatically
-            if (number != 1) {                                    // ignore line 1 (#eachLine() line numbering begins at 1, not 0)
-                String device = (line as String).split("\\s+")[0] // get device ID (`as String` is unnecessary, except to stop my IDE from warning me about #split())
-                if (!device.isEmpty()) {                          // ignore empty IDs (such as on the last, blank line)
+        p.in.eachLine { line ->                                   // #eachLine() handles resource opening and closing automatically
+            if (doParse) {                                        // We're going to wait till we've seen the line 'List of devices attached'
+                String[] deviceWithStatus = (line as String).split("\\s+") // (line as String).split("\\s+")[0] // get device ID (`as String` is unnecessary, except to stop my IDE from warning me about #split())
+                String device = deviceWithStatus[0]
+                String status = deviceWithStatus.length > 1 ? deviceWithStatus[1] : "offline"
+
+                // ignore empty IDs (such as on the last, blank line)
+                if (!device.isEmpty() && status.equalsIgnoreCase("device")) {
                     devices.add(device)
                 }
+            }
+            if (!doParse && line.contains('List')) { // stop checking once we have set doParse to `true`
+                doParse = true;
             }
         }
 

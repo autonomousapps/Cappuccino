@@ -5,8 +5,12 @@ plugins {
     id "maven"
 }
 
+// Java version
+sourceCompatibility = 1.6
+targetCompatibility = 1.6
+
 group 'com.metova'
-version '0.7.1'
+version '0.7.3'
 
 repositories {
     jcenter()
