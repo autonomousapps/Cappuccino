@@ -74,7 +74,7 @@ buildscript {
     }
   }
   dependencies {
-    classpath "gradle.plugin.com.metova:cappuccino-plugin:0.7.1"
+    classpath "gradle.plugin.com.metova:cappuccino-plugin:0.7.3"
   }
 }
 
