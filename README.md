@@ -47,9 +47,9 @@ That's it! (mostly)
 
 ## Automatically disable and re-enable system animations
 If you want to automatically disable and re-enable system animations, there are (unfortunately, but necessarily) several steps to follow. In summary, they are:
- 1. Create or modify a `debug/AndroidManifest.xml` or (`[flavor]Debug/AndroidManifest.xml` for each flavor, if you have them), as below
- 2. Apply the Cappuccino Animations plugin
- 3. Add some code to your test classes, as below
+ 1. Apply the Cappuccino Animations plugin.
+ 2. Create or modify a `debug/AndroidManifest.xml` or (`[flavor]Debug/AndroidManifest.xml` for each flavor, if you have them), as below.
+ 3. Add some code to your test classes, as below.
 
 ### Sample `debug/AndroidManifest.xml`
 ```
