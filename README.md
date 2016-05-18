@@ -51,19 +51,6 @@ If you want to automatically disable and re-enable system animations, there are 
  2. Create or modify a `debug/AndroidManifest.xml` or (`[flavor]Debug/AndroidManifest.xml` for each flavor, if you have them), as below.
  3. Add some code to your test classes, as below.
 
-### Sample `debug/AndroidManifest.xml`
-```
-<?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <!-- Disable animations on debug builds so that the animations do not interfere with Espresso
-             tests. Adding this permission to the manifest is not sufficient - you must also grant the
-             permission over adb! -->
-    <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
-
-</manifest>
-```
-
 ### Apply the Cappuccino Animations plugin at the top of your `build.gradle`:
 
 ```gradle
@@ -79,6 +66,19 @@ buildscript {
 }
 
 apply plugin: "com.metova.cappuccino-animations"
+```
+
+### Sample `debug/AndroidManifest.xml`
+```
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Disable animations on debug builds so that the animations do not interfere with Espresso
+             tests. Adding this permission to the manifest is not sufficient - you must also grant the
+             permission over adb! -->
+    <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
+
+</manifest>
 ```
 
 ### Sample test class
