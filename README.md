@@ -4,8 +4,9 @@ A sweeter Espresso. At present, there are two main features of Cappuccino:
  2. Never manually disable system animations again. By using the `SystemAnimations` class of Cappuccino, along with the new [Cappuccino Animations Gradle plugin](https://plugins.gradle.org/plugin/com.metova.cappuccino-animations), you can automatically disable and re-enable system animations.
 
 ##Current version
-Cappuccino Android library: 0.6.0
-Cappuccino Animations Gradle plugin: 0.7.3
+**Cappuccino Android library:** 0.6.0
+
+**Cappuccino Animations Gradle plugin:** 0.7.3
 
 ##Getting Started
 In your `build.gradle`:
