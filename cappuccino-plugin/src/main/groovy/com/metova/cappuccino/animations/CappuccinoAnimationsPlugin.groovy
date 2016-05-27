@@ -23,9 +23,9 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
     // It first gets the list of connected devices by executing a process that runs `adb devices` and parses the result.
     // Then, it iterates through all the "application variants", which are the combination of build type and flavor.
     // It then dynamically generates a task for each combination of variant and connected device. If there are two variants
-    // (flavor1Debug and flavor2Debug) and two connected devices (say, with IDs 1000 and 2000), then it will generate four tasks with
-    // names grantAnimationPermissionFlavor1DebugWithId1000, .... It then sets those dynamically-created tasks as dependencies
-    // for assemble*AndroidTest (e.g., assembleFlavor1DebugAndroidTest).
+    // (flavor1Debug and flavor2Debug) and two connected devices (say, with IDs 1000 and 2000), then it will generate four
+    // tasks with names grantAnimationPermissionFlavor1DebugWithId1000, .... It then sets those dynamically-created tasks as
+    // dependencies for assemble*AndroidTest (e.g., assembleFlavor1DebugAndroidTest).
     @SuppressWarnings("GroovyAssignabilityCheck")
     @Override
     void apply(Project project) {
@@ -89,14 +89,8 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
             dependsOn "install${variantName.capitalize()}"
 
             //noinspection GrUnresolvedAccess
-            commandLine "${getAdbExe()} -s $deviceId shell pm grant $applicationId android.permission.SET_ANIMATION_SCALE".split(' ') // TODO make it work with Windows
+            commandLine "${getAdbExe()} -s $deviceId shell pm grant $applicationId android.permission.SET_ANIMATION_SCALE".split(' ')
         }
-
-        // I would really love if this worked
-//        project.task("grantAnimationPermission${variantName.capitalize()}WithId$deviceId", type: GrantAnimationPermission) {
-//            command = "${getAdbExe()} -s $deviceId shell pm grant $applicationId android.permission.SET_ANIMATION_SCALE"//.split(' ')
-//            dependingConfig = variantName.capitalize()
-//        }
     }
 
     /**
@@ -110,10 +104,10 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
 
         boolean doParse = false;
         def devices = []
-        p.in.eachLine { line ->                                   // #eachLine() handles resource opening and closing automatically
-            if (doParse) {                                        // We're going to wait till we've seen the line 'List of devices attached'
-                String[] deviceWithStatus = (line as String).split("\\s+") // (line as String).split("\\s+")[0] // get device ID (`as String` is unnecessary, except to stop my IDE from warning me about #split())
-                String device = deviceWithStatus[0]
+        p.in.eachLine { line ->                                            // #eachLine() handles resource opening and closing automatically
+            if (doParse) {                                                 // We're going to wait till we've seen the line 'List of devices attached'
+                String[] deviceWithStatus = (line as String).split("\\s+") // get device ID and status
+                String device = deviceWithStatus[0]                        // (`as String` is unnecessary, except to stop my IDE from complaining about #split())
                 String status = deviceWithStatus.length > 1 ? deviceWithStatus[1] : "offline"
 
                 // ignore empty IDs (such as on the last, blank line)
