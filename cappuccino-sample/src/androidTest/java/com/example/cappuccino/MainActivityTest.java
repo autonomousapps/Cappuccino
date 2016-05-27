@@ -2,7 +2,7 @@ package com.example.cappuccino;
 
 import com.metova.cappuccino.Cappuccino;
 import com.metova.cappuccino.CappuccinoIdlingResource;
-import com.metova.cappuccino.SystemAnimations;
+import com.metova.cappuccino.animations.SystemAnimations;
 
 import org.junit.After;
 import org.junit.AfterClass;

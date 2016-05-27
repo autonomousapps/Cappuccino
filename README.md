@@ -89,7 +89,7 @@ apply plugin: "com.metova.cappuccino-animations"
 If you have all of your test classes inherit from this class, then you only need to do the following once.
 
 ```java
-import com.metova.cappuccino.SystemAnimations;
+import com.metova.cappuccino.animations.SystemAnimations;
 
 public class BaseTestClass {
     @BeforeClass
