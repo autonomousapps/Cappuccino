@@ -6,7 +6,7 @@ A sweeter Espresso. At present, there are two main features of Cappuccino:
 <a href="http://www.methodscount.com/?lib=com.metova%3Acappuccino-no-op%3A0.6.0"><img src="https://img.shields.io/badge/Methods and size-24 | 4 KB-e91e63.svg"></img></a>
 
 ##Current version
-**Cappuccino Android library:** 0.6.0
+**Cappuccino Android library:** 0.7.0
 
 **Cappuccino Animations Gradle plugin:** 0.7.3
 
@@ -25,10 +25,10 @@ dependencies {
     
     // ...other dependencies...
     
-    debugCompile('com.metova:cappuccino:0.6.0') {
+    debugCompile('com.metova:cappuccino:0.7.0') {
         transitive = false
     }
-    releaseCompile 'com.metova:cappuccino-no-op:0.6.0'
+    releaseCompile 'com.metova:cappuccino-no-op:0.7.0'
 }
 ```
 
