@@ -1,5 +1,7 @@
 package com.metova.cappuccino;
 
+import android.view.View;
+
 public class Cappuccino {
 
     private static final CappuccinoResourceWatcher NO_OP_RESOURCE_WATCHER = new CappuccinoResourceWatcher();
@@ -56,5 +58,11 @@ public class Cappuccino {
     }
 
     public static void reset() {
+    }
+
+    public static void setTagForTesting(View view, Object tag) {
+    }
+
+    public static void setTagForTesting(View view, int key, Object tag) {
     }
 }

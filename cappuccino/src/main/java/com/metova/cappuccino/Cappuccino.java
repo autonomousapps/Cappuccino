@@ -1,9 +1,13 @@
 package com.metova.cappuccino;
 
+import org.hamcrest.Matcher;
+
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
-import android.support.annotation.VisibleForTesting;
+import android.support.annotation.Nullable;
 import android.support.test.espresso.Espresso;
 import android.support.test.espresso.IdlingResource;
+import android.view.View;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -212,7 +216,6 @@ public class Cappuccino {
      * Resets {@code Cappuccino}'s internal state, for use in a {@code tearDown()}-type method during testing.
      * This will also ensure that no {@code IdlingResource}s remain registered with Espresso.
      */
-    @VisibleForTesting
     public static void reset() {
         // TODO Is this necessary? My concern is a failing test that, because it fails, does not unregister a resource
         // TODO this will throw an NPE during a unit test
@@ -220,5 +223,36 @@ public class Cappuccino {
 
         mResourceWatcherRegistry.clear();
         mIdlingResourceRegistry.clear();
+    }
+
+    /**
+     * Use this this to set a tag on a {@code View}. This is a convenience for finding {@code View}s with
+     * {@link android.support.test.espresso.matcher.ViewMatchers#withTagValue(Matcher) Espresso.onView(withTagValue(tag))}.
+     * The no-op version does nothing (of course). Use this only to help navigate complex view hierarchies, because you're
+     * lazy and don't want to use {@code Espresso.onView(allOf(...))}.
+     *
+     * <p>See also {@link View#setTag(Object)}.</p>
+     *
+     * @param view The {@code View} to tag.
+     * @param tag  The tag.
+     */
+    public static void setTagForTesting(@NonNull View view, @Nullable Object tag) {
+        view.setTag(tag);
+    }
+
+    /**
+     * Use this this to set a tag on a {@code View}. This is a convenience for finding {@code View}s with
+     * {@link android.support.test.espresso.matcher.ViewMatchers#withTagKey(int, Matcher)}  Espresso.onView(withTagKey(int))}.
+     * The no-op version does nothing (of course). Use this only to help navigate complex view hierarchies, because you're
+     * lazy and don't want to use {@code Espresso.onView(allOf(...))}.
+     *
+     * <p>See also {@link View#setTag(int, Object)}.</p>
+     *
+     * @param view The {@code View} to tag.
+     * @param key  The key.
+     * @param tag  The tag. A default tag has been made available via {@code R.id.cappuccino_testing_tag}.
+     */
+    public static void setTagForTesting(@NonNull View view, @IdRes int key, @Nullable Object tag) {
+        view.setTag(key, tag);
     }
 }

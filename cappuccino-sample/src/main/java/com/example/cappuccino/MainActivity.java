@@ -14,6 +14,9 @@ public class MainActivity extends AppCompatActivity {
 
     public static final String RESOURCE_MULTIPLE_ACTIVITIES = "resource_mult_activities";
 
+    static final Object VIEW_TAG_1 = "view_tag1";
+    static final Object VIEW_TAG_2 = "view_tag2";
+
     private CappuccinoResourceWatcher mWatcher;
 
     private TextView mTextView;
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mTextView = (TextView) findViewById(R.id.text_hello);
+
+        setTestingTags();
 
         // Get an idling resource watcher associated with `this`. Internally, Cappuccino
         // translates `this` into a String based on the class name, so don't worry about
@@ -34,6 +39,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         initViews();
+    }
+
+    /**
+     * Set testing tags for easier view-finding.
+     */
+    private void setTestingTags() {
+        assert mTextView != null;
+
+        Cappuccino.setTagForTesting(mTextView, VIEW_TAG_1);
+        Cappuccino.setTagForTesting(mTextView, R.id.cappuccino_testing_tag, VIEW_TAG_2);
     }
 
     private void initViews() {

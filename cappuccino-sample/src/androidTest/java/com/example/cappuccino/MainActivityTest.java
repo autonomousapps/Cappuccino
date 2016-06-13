@@ -15,12 +15,16 @@ import android.content.Intent;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.espresso.Espresso;
 import android.support.test.rule.ActivityTestRule;
+import android.view.View;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 public class MainActivityTest {
 
@@ -86,5 +90,14 @@ public class MainActivityTest {
 
         // Unregister the IdlingResource
         Cappuccino.unregisterIdlingResource(MainActivity.RESOURCE_MULTIPLE_ACTIVITIES);
+    }
+
+    @Test
+    public void testSetTestingTagSetsTag() throws Exception {
+        View view = mActivityTestRule.getActivity().findViewById(R.id.text_hello);
+
+        assertTrue(view != null);
+        assertThat(view.getTag(), is(MainActivity.VIEW_TAG_1));
+        assertThat(view.getTag(R.id.cappuccino_testing_tag), is(MainActivity.VIEW_TAG_2));
     }
 }

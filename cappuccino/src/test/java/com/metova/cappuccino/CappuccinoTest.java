@@ -3,9 +3,13 @@ package com.metova.cappuccino;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mockito;
+
+import android.view.View;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.verify;
 
 public class CappuccinoTest {
 
@@ -71,5 +75,20 @@ public class CappuccinoTest {
     @Test(expected = CappuccinoException.class)
     public void testUnregisteringWithoutResourceWatcherThrowsException() throws Exception {
         Cappuccino.unregisterIdlingResource(new Object());
+    }
+
+    @Test
+    public void testSetTagSetsTag() throws Exception {
+        // TODO replace this test with an instrumented test so we don't need mock Views
+        // Method 1
+        View mockView1 = Mockito.mock(View.class);
+        Cappuccino.setTagForTesting(mockView1, "tag");
+        verify(mockView1).setTag("tag");
+
+        // Method 2
+        View mockView2 = Mockito.mock(View.class);
+        //noinspection ResourceType
+        Cappuccino.setTagForTesting(mockView2, 1, "tag");
+        verify(mockView2).setTag(1, "tag");
     }
 }
