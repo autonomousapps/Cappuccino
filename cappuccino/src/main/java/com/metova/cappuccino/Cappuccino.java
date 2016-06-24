@@ -1,12 +1,9 @@
 package com.metova.cappuccino;
 
-import org.hamcrest.Matcher;
-
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.test.espresso.Espresso;
-import android.support.test.espresso.IdlingResource;
 import android.view.View;
 
 import java.util.HashMap;
@@ -18,6 +15,10 @@ public class Cappuccino {
     private static final Map<String, CappuccinoResourceWatcher> mResourceWatcherRegistry = new HashMap<>();
 
     private static final Map<String, CappuccinoIdlingResource> mIdlingResourceRegistry = new HashMap<>();
+
+    private Cappuccino() {
+        // satisfy checkstyle
+    }
 
     /**
      * Returns a new {@code CappuccinoResourceWatcher}, which will be associated internally with a name derived from
@@ -155,8 +156,9 @@ public class Cappuccino {
     }
 
     /**
-     * Convenience method for {@link Espresso#registerIdlingResources(IdlingResource...)}, which first
-     * instantiates an {@link CappuccinoIdlingResource}, then registers it with {@code Espresso}.
+     * Convenience method for {@link Espresso#registerIdlingResources(android.support.test.espresso.IdlingResource...)
+     * Espresso#registerIdlingResources(IdlingResource...)}, which first instantiates an {@link CappuccinoIdlingResource},
+     * then registers it with {@code Espresso}.
      *
      * @param object The object from which to generate an {@code CappuccinoIdlingResource}.
      * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
@@ -167,8 +169,9 @@ public class Cappuccino {
     }
 
     /**
-     * Convenience method for {@link Espresso#registerIdlingResources(IdlingResource...)}, which first
-     * instantiates an {@link CappuccinoIdlingResource}, then registers it with {@code Espresso}.
+     * Convenience method for {@link Espresso#registerIdlingResources(android.support.test.espresso.IdlingResource...)
+     * Espresso#registerIdlingResources(IdlingResource...)}, which first instantiates an {@link CappuccinoIdlingResource},
+     * then registers it with {@code Espresso}.
      *
      * @param name The name from which to generate an {@code CappuccinoIdlingResource}.
      * @throws CappuccinoException if there is no {@code CappuccinoResourceWatcher} associated
@@ -183,8 +186,8 @@ public class Cappuccino {
     }
 
     /**
-     * Convenience method for {@link Espresso#unregisterIdlingResources(IdlingResource...)}, which
-     * is the twin of {@link #registerIdlingResource(Object)}.
+     * Convenience method for {@link Espresso#unregisterIdlingResources(android.support.test.espresso.IdlingResource...)
+     * Espresso#registerIdlingResources(IdlingResource...)}, which is the twin of {@link #registerIdlingResource(Object)}.
      *
      * @param object The object associated with the {@link CappuccinoIdlingResource} you wish to
      *               unregister.
@@ -196,8 +199,8 @@ public class Cappuccino {
     }
 
     /**
-     * Convenience method for {@link Espresso#unregisterIdlingResources(IdlingResource...)}, which
-     * is the twin of {@link #registerIdlingResource(String)}.
+     * Convenience method for {@link Espresso#unregisterIdlingResources(android.support.test.espresso.IdlingResource...)
+     * Espresso#registerIdlingResources(IdlingResource...)}, which is the twin of {@link #registerIdlingResource(String)}.
      *
      * @param name The name associated with the {@link CappuccinoIdlingResource} you wish to
      *             unregister.
@@ -227,7 +230,7 @@ public class Cappuccino {
 
     /**
      * Use this this to set a tag on a {@code View}. This is a convenience for finding {@code View}s with
-     * {@link android.support.test.espresso.matcher.ViewMatchers#withTagValue(Matcher) Espresso.onView(withTagValue(tag))}.
+     * {@link android.support.test.espresso.matcher.ViewMatchers#withTagValue(org.hamcrest.Matcher) Espresso.onView(withTagValue(tag))}.
      * The no-op version does nothing (of course). Use this only to help navigate complex view hierarchies, because you're
      * lazy and don't want to use {@code Espresso.onView(allOf(...))}.
      *
@@ -242,7 +245,7 @@ public class Cappuccino {
 
     /**
      * Use this this to set a tag on a {@code View}. This is a convenience for finding {@code View}s with
-     * {@link android.support.test.espresso.matcher.ViewMatchers#withTagKey(int, Matcher)}  Espresso.onView(withTagKey(int))}.
+     * {@link android.support.test.espresso.matcher.ViewMatchers#withTagKey(int, org.hamcrest.Matcher)}  Espresso.onView(withTagKey(int))}.
      * The no-op version does nothing (of course). Use this only to help navigate complex view hierarchies, because you're
      * lazy and don't want to use {@code Espresso.onView(allOf(...))}.
      *

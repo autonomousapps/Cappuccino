@@ -2,7 +2,7 @@ apply plugin: 'checkstyle'
 
 checkstyle {
   configFile rootProject.file('checkstyle.xml')
-  showViolations true
+  showViolations = true
 }
 
 android.libraryVariants.all { variant ->

@@ -9,7 +9,7 @@ import android.support.annotation.VisibleForTesting;
  */
 public final class SystemAnimations {
 
-    private static SystemAnimations INSTANCE = null;
+    private static SystemAnimations sInstance = null;
 
     private PermissionChecker mPermissionChecker = new PermissionChecker();
     private WindowManager mWindowManager = new WindowManager();
@@ -25,15 +25,15 @@ public final class SystemAnimations {
     }
 
     private static SystemAnimations getInstance(@NonNull Context context) {
-        if (INSTANCE == null) {
+        if (sInstance == null) {
             synchronized (SystemAnimations.class) {
-                if (INSTANCE == null) {
-                    INSTANCE = new SystemAnimations();
-                    INSTANCE.checkPermissionStatus(context);
+                if (sInstance == null) {
+                    sInstance = new SystemAnimations();
+                    sInstance.checkPermissionStatus(context);
                 }
             }
         }
-        return INSTANCE;
+        return sInstance;
     }
 
     // TODO add a Policy class that allows a warning to be emitted, instead
@@ -107,14 +107,14 @@ public final class SystemAnimations {
     @VisibleForTesting
     @NonNull
     static String getPermissionErrorMessage() {
-        return "Application not granted access to animations. Common causes for this exception include:\n" +
-                "\tFailure to declare `<uses-permission android:name=\"android.permission.SET_ANIMATION_SCALE\" />` in the manifest;\n" +
-                "\tFailure to apply the Cappuccino Animations plugin in your application's build.gradle file; and\n" +
-                "\tFailure of the Cappuccino Animations plugin.\n" +
-                "\tIf this last is the issue, consider adding a configuration to the `cappuccino {}` closure in the build.gradle file. For example:\n" +
-                "\tcappuccino {\n" +
-                "\t\texcludedConfigurations = ['badConfiguration', 'otherBadConfiguration', ...]\n" +
-                "\t}";
+        return "Application not granted access to animations. Common causes for this exception include:\n"
+                + "\tFailure to declare `<uses-permission android:name=\"android.permission.SET_ANIMATION_SCALE\" />` in the manifest;\n"
+                + "\tFailure to apply the Cappuccino Animations plugin in your application's build.gradle file; and\n"
+                + "\tFailure of the Cappuccino Animations plugin.\n"
+                + "\tIf this last is the issue, consider adding a configuration to the `cappuccino {}` closure in the build.gradle file. For example:\n"
+                + "\tcappuccino {\n"
+                + "\t\texcludedConfigurations = ['badConfiguration', 'otherBadConfiguration', ...]\n"
+                + "\t}";
     }
 
     @VisibleForTesting

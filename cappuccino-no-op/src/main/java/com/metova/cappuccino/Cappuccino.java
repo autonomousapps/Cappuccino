@@ -6,6 +6,10 @@ public class Cappuccino {
 
     private static final CappuccinoResourceWatcher NO_OP_RESOURCE_WATCHER = new CappuccinoResourceWatcher();
 
+    private Cappuccino() {
+        // satisfy checkstyle
+    }
+
     public static CappuccinoResourceWatcher newIdlingResourceWatcher(Object ignored) {
         return NO_OP_RESOURCE_WATCHER;
     }
