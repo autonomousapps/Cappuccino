@@ -44,3 +44,5 @@ dependencies {
     androidTestCompile 'com.android.support.test:runner:0.4.1'
     androidTestCompile 'com.android.support:support-annotations:23.3.0'
 }
+
+apply from: rootProject.file('gradle/checkstyle-app.gradle')

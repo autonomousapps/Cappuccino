@@ -36,3 +36,5 @@ pluginBundle {
         }
     }
 }
+
+//apply from: rootProject.file('gradle/checkstyle.gradle')

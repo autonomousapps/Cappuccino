@@ -38,5 +38,5 @@ task sourceJar(type: Jar) {
 apply from: rootProject.file('gradle/gradle-bintray-install.gradle')
 apply from: rootProject.file('gradle/gradle-bintray-upload.gradle')
 // TODO
-apply from: rootProject.file('gradle/checkstyle.gradle')
+apply from: rootProject.file('gradle/checkstyle-lib.gradle')
 //apply from: rootProject.file('gradle/gradle-mvn-push.gradle')
