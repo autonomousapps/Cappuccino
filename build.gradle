@@ -31,7 +31,7 @@ ext {
     javaVersion = JavaVersion.VERSION_1_7
 
     GROUP = "com.metova"
-    VERSION_NAME = "0.8.1"
+    VERSION_NAME = "0.9"
 
     BINTRAY_REPO = "maven"
 //    BINTRAY_NAME = "cappuccino"
