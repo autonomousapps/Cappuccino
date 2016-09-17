@@ -38,7 +38,7 @@ dependencies {
 
     // ...other dependencies...
 
-    androidTestCompile 'com.android.support:support-annotations:24.1.1'
+    androidTestCompile 'com.android.support:support-annotations:24.2.1'
     androidTestCompile 'com.android.support.test:runner:0.5'
     androidTestCompile 'com.android.support.test:rules:0.5'
     androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
@@ -78,8 +78,8 @@ apply plugin: "com.metova.cappuccino-animations"
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- Disable animations on debug builds so that the animations do not interfere with Espresso
-             tests. Adding this permission to the manifest is not sufficient - you must also grant the
-             permission over adb! -->
+         tests. Adding this permission to the manifest is not sufficient - you must also grant the
+         permission over adb! -->
     <uses-permission android:name="android.permission.SET_ANIMATION_SCALE" />
 
 </manifest>
