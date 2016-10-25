@@ -69,7 +69,7 @@ apply plugin: "com.metova.cappuccino-animations"
 ```
 
 ### Sample `debug/AndroidManifest.xml`
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
