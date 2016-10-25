@@ -45,8 +45,8 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support:support-annotations:24.1.1'
-    compile 'com.android.support.test.espresso:espresso-core:2.2.2'
+    provided 'com.android.support:support-annotations:24.2.1'
+    provided 'com.android.support.test.espresso:espresso-core:2.2.2'
 
     // Unit tests
     testCompile 'junit:junit:4.12'

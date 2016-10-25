@@ -39,13 +39,14 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
             project.android.applicationVariants.each { variant ->
                 if (variantNotExcluded(variant.name)) {
                     devices().each { device ->
-                        def assembleTask = project.tasks.findByName("assemble${variant.name.capitalize()}AndroidTest")
+                        def taskName = "connected${variant.name.capitalize()}AndroidTest"
+                        def testTask = project.tasks.findByName(taskName)
 
-                        if (assembleTask != null) {
-                            Task animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
-                            assembleTask.dependsOn animTask
+                        if (testTask != null) {
+                            def animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
+                            testTask.dependsOn animTask
                         } else {
-                            logger.warn("task assemble${variant.name.capitalize()}AndroidTest does not exist! Cannot create GrantAnimationPermission task.")
+                            logger.warn("task $taskName does not exist! Cannot create GrantAnimationPermission task.")
                         }
                     }
                 }
@@ -63,7 +64,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
      * Returns true is this is a variant for which we wish to create a grantAnimationPermission task.
      */
     private boolean variantNotExcluded(String variantName) {
-        // Apparently you can't break out of an #each() closure early
+        // use #find {} instead?
         for (String config : project.cappuccino.excludedConfigurations) {
             if (variantName.toLowerCase().contains(config.toLowerCase())) {
                 return false

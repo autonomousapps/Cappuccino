@@ -10,4 +10,9 @@
 # Custom
 .idea/**
 
-projectFilesBackup/**
+.idea/
+cappuccino-no-op/libs/
+cappuccino-sample/libs/
+cappuccino-sample/src/main/res/drawable/
+projectFilesBackup/
+cappuccino-plugin/build/
