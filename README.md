@@ -6,9 +6,9 @@ A sweeter Espresso. At present, there are two main features of Cappuccino:
 <a href="http://www.methodscount.com/?lib=com.metova%3Acappuccino-no-op%3A0.6.0"><img src="https://img.shields.io/badge/Methods and size-24 | 4 KB-e91e63.svg"></img></a>
 
 ##Current version
-**Cappuccino Android library:** 0.9
+**Cappuccino Android library:** 0.9.1
 
-**Cappuccino Animations Gradle plugin:** 0.7.3
+**Cappuccino Animations Gradle plugin:** 0.8
 
 ##Getting Started
 In your `build.gradle`:
@@ -25,10 +25,8 @@ dependencies {
     
     // ...other dependencies...
     
-    debugCompile("com.metova:cappuccino:${latest_version}") {
-        transitive = false
-    }
-    releaseCompile "com.metova:cappuccino-no-op:${latest_version}"
+    debugCompile "com.metova:cappuccino:${latest_lib_version}"
+    releaseCompile "com.metova:cappuccino-no-op:${latest_lib_version}"
 }
 ```
 
@@ -60,12 +58,10 @@ If you want to automatically disable and re-enable system animations, there are 
 ```gradle
 buildscript {
   repositories {
-    maven {
-      url "https://plugins.gradle.org/m2/"
-    }
+    maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
-    classpath "gradle.plugin.com.metova:cappuccino-plugin:0.7.3"
+    classpath "gradle.plugin.com.metova:cappuccino-plugin:${latest_plugin_version}"
   }
 }
 
