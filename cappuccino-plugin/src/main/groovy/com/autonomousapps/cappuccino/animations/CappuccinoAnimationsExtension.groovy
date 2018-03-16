@@ -1,4 +1,4 @@
-package com.metova.cappuccino.animations
+package com.autonomousapps.cappuccino.animations
 
 /**
  * The plugin extension for Cappuccino Animations plugin. Any variant included

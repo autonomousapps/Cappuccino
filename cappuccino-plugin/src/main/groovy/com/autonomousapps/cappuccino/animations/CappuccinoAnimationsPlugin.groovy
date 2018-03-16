@@ -1,4 +1,4 @@
-package com.metova.cappuccino.animations
+package com.autonomousapps.cappuccino.animations
 
 import org.gradle.api.Plugin
 import org.gradle.api.Project

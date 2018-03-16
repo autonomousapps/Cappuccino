@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.metova.cappuccino-animations'
+//apply plugin: "com.autonomousapps.cappuccino-animations"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion

@@ -9,7 +9,7 @@ plugins {
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
-group 'com.metova'
+group 'com.autonomousapps'
 version '0.8.1'
 
 repositories {
@@ -24,14 +24,14 @@ dependencies {
 }
 
 pluginBundle {
-    website = 'https://github.com/metova/Cappuccino'
-    vcsUrl = 'https://github.com/metova/Cappuccino'
+    website = 'https://github.com/autonomousapps/Cappuccino'
+    vcsUrl = 'https://github.com/autonomousapps/Cappuccino'
     description = 'A sweeter Espresso. Never manually turn off system animations again.'
     tags = ['android', 'espresso', 'animations']
 
     plugins {
         cappuccinoAnimationsPlugin {
-            id = 'com.metova.cappuccino-animations'
+            id = 'com.autonomousapps.cappuccino-animations'
             displayName = 'Cappuccino Animations plugin'
         }
     }
