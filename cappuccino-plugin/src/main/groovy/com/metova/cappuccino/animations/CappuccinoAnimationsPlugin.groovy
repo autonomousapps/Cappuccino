@@ -39,14 +39,12 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
             project.android.applicationVariants.each { variant ->
                 if (variantNotExcluded(variant.name)) {
                     devices().each { device ->
-                        def taskName = "connected${variant.name.capitalize()}AndroidTest"
-                        def testTask = project.tasks.findByName(taskName)
-
-                        if (testTask != null) {
-                            def animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
-                            testTask.dependsOn animTask
+                        def assembleTask = project.tasks.findByName("assemble${variant.name.capitalize()}AndroidTest")
+                        if (assembleTask != null) {
+                            Task animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
+                            assembleTask.dependsOn animTask
                         } else {
-                            logger.warn("task $taskName does not exist! Cannot create GrantAnimationPermission task.")
+                            logger.warn("task assemble${variant.name.capitalize()}AndroidTest does not exist! Cannot create GrantAnimationPermission task.")
                         }
                     }
                 }
