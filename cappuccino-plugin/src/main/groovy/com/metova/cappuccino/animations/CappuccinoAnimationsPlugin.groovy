@@ -103,14 +103,15 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
 
         boolean doParse = false
         def devices = []
-        p.in.eachLine { line ->                                            // #eachLine() handles resource opening and closing automatically
-            if (doParse) {                                                 // We're going to wait till we've seen the line 'List of devices attached'
-                String[] deviceWithStatus = (line as String).split("\\s+") // get device ID and status
-                String device = deviceWithStatus[0]                        // (`as String` is unnecessary, except to stop my IDE from complaining about #split())
+        p.in.eachLine { line ->                                   // #eachLine() handles resource opening and closing automatically
+            if (doParse) {                                        // We're going to wait till we've seen the line 'List of devices attached'
+                String[] deviceWithStatus = line.split("\\s+") // get device ID and status
+                String device = deviceWithStatus[0]
                 String status = deviceWithStatus.length > 1 ? deviceWithStatus[1] : "offline"
 
                 // ignore empty IDs (such as on the last, blank line)
                 if (!device.isEmpty() && status.equalsIgnoreCase("device")) {
+                    device = device.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
                     devices.add(device)
                 }
             }
