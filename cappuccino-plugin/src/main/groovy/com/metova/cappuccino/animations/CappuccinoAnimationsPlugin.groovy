@@ -101,7 +101,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
         Process p = "${getAdbExe()} devices".execute()
         p.waitFor() // TODO tsr: check exit value and deal with InterruptedException?
 
-        boolean doParse = false;
+        boolean doParse = false
         def devices = []
         p.in.eachLine { line ->                                            // #eachLine() handles resource opening and closing automatically
             if (doParse) {                                                 // We're going to wait till we've seen the line 'List of devices attached'
@@ -115,7 +115,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
                 }
             }
             if (!doParse && line.contains('List')) { // stop checking once we have set doParse to `true`
-                doParse = true;
+                doParse = true
             }
         }
 
