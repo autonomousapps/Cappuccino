@@ -25,8 +25,8 @@ dependencies {
     
     // ...other dependencies...
     
-    debugCompile "com.metova:cappuccino:${latest_lib_version}"
-    releaseCompile "com.metova:cappuccino-no-op:${latest_lib_version}"
+    debugCompile "com.autonomousapps:cappuccino:${latest_lib_version}"
+    releaseCompile "com.autonomousapps:cappuccino-no-op:${latest_lib_version}"
 }
 ```
 
@@ -61,11 +61,11 @@ buildscript {
     maven { url "https://plugins.gradle.org/m2/" }
   }
   dependencies {
-    classpath "gradle.plugin.com.metova:cappuccino-plugin:${latest_plugin_version}"
+    classpath "gradle.plugin.com.autonomousapps:cappuccino-plugin:${latest_plugin_version}"
   }
 }
 
-apply plugin: "com.metova.cappuccino-animations"
+apply plugin: "com.autonomousapps.cappuccino-animations"
 ```
 
 ### Sample `debug/AndroidManifest.xml`
@@ -215,7 +215,7 @@ public class MainActivityTest {
 Please check out the `cappuccino-sample` module for more sample usages!
 
 # License
-> Copyright 2016 Metova, Inc.
+> Copyright 2018 AutonomousApps
 > 
 > Licensed under the Apache License, Version 2.0 (the "License");
 > you may not use this file except in compliance with the License.
