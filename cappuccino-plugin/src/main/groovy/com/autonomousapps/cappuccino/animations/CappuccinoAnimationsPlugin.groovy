@@ -41,6 +41,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
                     devices().each { device ->
                         def assembleTask = project.tasks.findByName("assemble${variant.name.capitalize()}AndroidTest")
                         if (assembleTask != null) {
+                            device = device.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
                             Task animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
                             assembleTask.dependsOn animTask
                         } else {
@@ -111,7 +112,6 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
 
                 // ignore empty IDs (such as on the last, blank line)
                 if (!device.isEmpty() && status.equalsIgnoreCase("device")) {
-                    device = device.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
                     devices.add(device)
                 }
             }

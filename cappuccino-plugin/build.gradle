@@ -10,7 +10,7 @@ sourceCompatibility = 1.6
 targetCompatibility = 1.6
 
 group 'com.autonomousapps'
-version '0.8.1'
+version '0.8.2'
 
 repositories {
     jcenter()
@@ -36,5 +36,3 @@ pluginBundle {
         }
     }
 }
-
-//apply from: rootProject.file('gradle/checkstyle.gradle')
