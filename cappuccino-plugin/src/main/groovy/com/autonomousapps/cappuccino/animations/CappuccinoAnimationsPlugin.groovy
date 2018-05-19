@@ -41,7 +41,6 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
                     devices().each { device ->
                         def assembleTask = project.tasks.findByName("assemble${variant.name.capitalize()}AndroidTest")
                         if (assembleTask != null) {
-                            device = device.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
                             Task animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
                             assembleTask.dependsOn animTask
                         } else {
@@ -82,7 +81,8 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
      * @param deviceId device ID
      */
     Task createGrantAnimationPermissionTask(String variantName, String applicationId, String deviceId) {
-        project.tasks.create("grantAnimationPermission${variantName.capitalize()}WithId$deviceId", Exec) {
+        deviceName = deviceId.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
+        project.tasks.create("grantAnimationPermission${variantName.capitalize()}WithId$deviceName", Exec) {
             description = 'Grants the SET_ANIMATION_SCALE permission to the app via `adb`'
             group = 'Verification'
 
