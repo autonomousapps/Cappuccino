@@ -15,7 +15,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
 
     private Project project
 
-    def getAdbExe() {
+    private def getAdbExe() {
         project.android.adbExe
     }
 
@@ -80,7 +80,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
      * @param applicationId application ID (package name)
      * @param deviceId device ID
      */
-    Task createGrantAnimationPermissionTask(String variantName, String applicationId, String deviceId) {
+    private Task createGrantAnimationPermissionTask(String variantName, String applicationId, String deviceId) {
         def deviceName = deviceId.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
         project.tasks.create("grantAnimationPermission${variantName.capitalize()}WithId$deviceName", Exec) {
             description = 'Grants the SET_ANIMATION_SCALE permission to the app via `adb`'
@@ -98,13 +98,13 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
      *
      * @return a list of connected devices.
      */
-    def devices() {
+    private def devices() {
         Process p = "${getAdbExe()} devices".execute()
         p.waitFor() // TODO tsr: check exit value and deal with InterruptedException?
 
         boolean doParse = false
         def devices = []
-        p.in.eachLine { line ->                                   // #eachLine() handles resource opening and closing automatically
+        p.in.eachLine { line ->
             if (doParse) {                                        // We're going to wait till we've seen the line 'List of devices attached'
                 String[] deviceWithStatus = line.split("\\s+") // get device ID and status
                 String device = deviceWithStatus[0]
