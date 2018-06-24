@@ -1,33 +1,30 @@
 buildscript {
     repositories {
+        google()
         jcenter()
 //        mavenLocal()
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.1.3'
+        classpath 'com.android.tools.build:gradle:3.1.3'
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.5'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.1'
-        classpath 'gradle.plugin.com.autonomousapps:cappuccino-plugin:0.8.3'
+        classpath 'gradle.plugin.com.autonomousapps:cappuccino-plugin:0.8.4'
     }
 }
 
 allprojects {
     repositories {
+        google()
         jcenter()
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
-
 ext {
-    minSdkVersion = 9
-    compileSdkVersion = 23
+    minSdkVersion = 14
+    compileSdkVersion = 27
     targetSdkVersion = compileSdkVersion
-    buildToolsVersion = '23.0.2'
-    javaVersion = JavaVersion.VERSION_1_7
+    javaVersion = JavaVersion.VERSION_1_8
 
     GROUP = "com.metova"
     VERSION_NAME = "0.9.1"

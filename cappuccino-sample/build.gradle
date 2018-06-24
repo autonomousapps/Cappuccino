@@ -3,7 +3,6 @@ apply plugin: "com.autonomousapps.cappuccino-animations"
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.example.cappuccino"
@@ -34,15 +33,15 @@ android {
 
 dependencies {
     // App dependencies
-    debugCompile project(':cappuccino')
-    releaseCompile project(':cappuccino-no-op')
+    debugImplementation project(':cappuccino')
+    releaseImplementation project(':cappuccino-no-op')
 
-    compile 'com.android.support:appcompat-v7:24.2.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
 
     // Instrumentation testing dependencies
-    androidTestCompile 'com.android.support.test.espresso:espresso-core:2.2.2'
-    androidTestCompile 'com.android.support.test:runner:0.5'
-    androidTestCompile 'com.android.support:support-annotations:24.2.1'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support:support-annotations:27.1.1'
 }
 
 task sanityCheck {

@@ -81,7 +81,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
      * @param deviceId device ID
      */
     Task createGrantAnimationPermissionTask(String variantName, String applicationId, String deviceId) {
-        deviceName = deviceId.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
+        def deviceName = deviceId.replaceAll(":", ".") // tasks cannot contain the ':' character in Gradle 5.0
         project.tasks.create("grantAnimationPermission${variantName.capitalize()}WithId$deviceName", Exec) {
             description = 'Grants the SET_ANIMATION_SCALE permission to the app via `adb`'
             group = 'Verification'
