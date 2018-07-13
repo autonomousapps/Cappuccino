@@ -43,7 +43,7 @@ dependencies {
 }
 ```
 
-Check [here](https://google.github.io/android-testing-support-library/docs/espresso/setup/) for Espresso setup instructions, and to ensure you're using the latest version.
+Check [here](https://developer.android.com/training/testing/espresso/setup) for Espresso setup instructions, and to ensure you're using the latest version.
 
 That's it! (mostly)
 
