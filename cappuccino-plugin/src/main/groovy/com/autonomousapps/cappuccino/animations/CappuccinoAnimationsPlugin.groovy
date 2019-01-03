@@ -39,10 +39,12 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
             project.android.applicationVariants.each { variant ->
                 if (variantNotExcluded(variant.name)) {
                     devices().each { device ->
-                        def assembleTask = project.tasks.findByName("assemble${variant.name.capitalize()}AndroidTest")
-                        if (assembleTask != null) {
+                        def packageTask = project.tasks.findByName("package${variant.name.capitalize()}AndroidTest")
+                        def installTask = project.tasks.findByName("install${variant.name.capitalize()}")
+                        if (packageTask != null && installTask != null) {
                             Task animTask = createGrantAnimationPermissionTask(variant.name, variant.applicationId, device)
-                            assembleTask.dependsOn animTask
+                            packageTask.finalizedBy installTask
+                            installTask.finalizedBy animTask
                         } else {
                             logger.warn("task assemble${variant.name.capitalize()}AndroidTest does not exist! Cannot create GrantAnimationPermission task.")
                         }
@@ -86,8 +88,6 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
             description = 'Grants the SET_ANIMATION_SCALE permission to the app via `adb`'
             group = 'Verification'
 
-            dependsOn "install${variantName.capitalize()}"
-
             //noinspection GrUnresolvedAccess
             commandLine "${getAdbExe()} -s $deviceId shell pm grant $applicationId android.permission.SET_ANIMATION_SCALE".split(' ')
         }
@@ -98,6 +98,7 @@ class CappuccinoAnimationsPlugin implements Plugin<Project> {
      *
      * @return a list of connected devices.
      */
+    @SuppressWarnings("GroovyMissingReturnStatement")
     private def devices() {
         Process p = "${getAdbExe()} devices".execute()
         p.waitFor() // TODO tsr: check exit value and deal with InterruptedException?
