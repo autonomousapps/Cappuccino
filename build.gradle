@@ -26,7 +26,7 @@ ext {
     targetSdkVersion = compileSdkVersion
     javaVersion = JavaVersion.VERSION_1_8
 
-    GROUP = "com.metova"
+    GROUP = "com.autonomousapps"
     VERSION_NAME = "0.9.1"
 
     BINTRAY_REPO = "maven"
@@ -36,11 +36,11 @@ ext {
 
     POM_PACKAGING = "aar"//"pom"
 //    POM_DESCRIPTION = "Cappuccino"
-    POM_URL = "https://github.com/metova/Cappuccino"
+    POM_URL = "https://github.com/autonomousapps/Cappuccino"
 
-    POM_SCM_URL = "https://github.com/metova/Cappuccino"
-    POM_SCM_CONNECTION = "scm:git:https://github.com/metova/Cappuccino.git"
-    POM_SCM_DEV_CONNECTION = "scm:git:git@github.com:metova/Cappuccino.git"
+    POM_SCM_URL = "https://github.com/autonomousapps/Cappuccino"
+    POM_SCM_CONNECTION = "scm:git:https://github.com/autonomousapps/Cappuccino.git"
+    POM_SCM_DEV_CONNECTION = "scm:git:git@github.com:autonomousapps/Cappuccino.git"
 
     POM_LICENSE_NAME = "The Apache Software License, Version 2.0"
     POM_LICENSE_URL = "http://www.apache.org/licenses/LICENSE-2.0.txt"
@@ -49,5 +49,5 @@ ext {
 
     POM_DEVELOPER_ID = "trobalik"
     POM_DEVELOPER_NAME = "Tony Robalik"
-    POM_DEVELOPER_EMAIL = "tony.robalik@metova.com"
+    POM_DEVELOPER_EMAIL = "tony.robalik@gmail.com"
 }

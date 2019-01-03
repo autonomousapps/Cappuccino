@@ -1,9 +1,7 @@
 # Cappuccino
 A sweeter Espresso. At present, there are two main features of Cappuccino:
  1. Never write your own IdlingResource again.
- 2. Never manually disable system animations again. By using the `SystemAnimations` class of Cappuccino, along with the new [Cappuccino Animations Gradle plugin](https://plugins.gradle.org/plugin/com.metova.cappuccino-animations), you can automatically disable and re-enable system animations.
-
-<a href="http://www.methodscount.com/?lib=com.metova%3Acappuccino-no-op%3A0.6.0"><img src="https://img.shields.io/badge/Methods and size-24 | 4 KB-e91e63.svg"></img></a>
+ 2. Never manually disable system animations again. By using the `SystemAnimations` class of Cappuccino, along with the new [Cappuccino Animations Gradle plugin](https://plugins.gradle.org/plugin/com.autonomousapps.cappuccino-animations), you can automatically disable and re-enable system animations.
 
 ## Current version
 **Cappuccino Android library:** 0.9.1
@@ -85,7 +83,7 @@ apply plugin: "com.autonomousapps.cappuccino-animations"
 If you have all of your test classes inherit from this class, then you only need to do the following once.
 
 ```java
-import com.metova.cappuccino.animations.SystemAnimations;
+import com.autonomousapps.cappuccino.animations.SystemAnimations;
 
 public class BaseTestClass {
     @BeforeClass
