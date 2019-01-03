@@ -1,1 +1,6 @@
-include ':cappuccino', ':cappuccino-no-op', ':cappuccino-sample', ':cappuccino-plugin'
+rootProject.name = "Cappuccino"
+
+include ':cappuccino'
+include ':cappuccino-no-op'
+include ':cappuccino-sample'
+include ':cappuccino-plugin'
