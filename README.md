@@ -6,7 +6,7 @@ A sweeter Espresso. At present, there are two main features of Cappuccino:
 ## Current version
 **Cappuccino Android library:** 0.9.1
 
-**Cappuccino Animations Gradle plugin:** 0.8.6
+**Cappuccino Animations Gradle plugin:** 0.9.0
 
 ## Minimum supported Android Gradle Plugin version
 3.3-rc03
